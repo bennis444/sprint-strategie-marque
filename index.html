@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprint Stratégie de Marque — Apprendre de zéro</title>
+<style>
+  :root{
+    --bg:#0a0b0f; --bg2:#11131a; --card:#161922; --card2:#1d2130;
+    --line:#262b3a; --txt:#e7e9ef; --mut:#9aa3b8; --dim:#6b7390;
+    --acc:#6c8cff; --acc2:#a855f7; --gold:#f5c451; --green:#34d399;
+    --red:#fb7185; --cyan:#22d3ee; --orange:#fb923c;
+    --r:16px; --shadow:0 10px 40px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:20px}
+  body{background:var(--bg);color:var(--txt);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:var(--acc);text-decoration:none}
+  ::selection{background:var(--acc);color:#fff}
+  /* layout */
+  .wrap{display:flex;min-height:100vh}
+  .side{width:268px;flex:0 0 268px;background:linear-gradient(180deg,#0c0e14,#0a0b0f);border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 14px}
+  .side::-webkit-scrollbar{width:7px}.side::-webkit-scrollbar-thumb{background:#222838;border-radius:9px}
+  .main{flex:1;min-width:0;padding:0 0 120px}
+  .brandhead{padding:4px 10px 18px}
+  .brandhead h1{font-size:16px;letter-spacing:.3px;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+  .brandhead p{font-size:11px;color:var(--dim);margin-top:3px;text-transform:uppercase;letter-spacing:1.5px}
+  nav a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:10px;color:var(--mut);font-size:13.5px;font-weight:500;margin-bottom:2px;transition:.15s;border:1px solid transparent}
+  nav a .ico{width:22px;text-align:center;font-size:15px}
+  nav a:hover{background:var(--card);color:var(--txt)}
+  nav a.on{background:linear-gradient(90deg,rgba(108,140,255,.18),rgba(168,85,247,.10));color:#fff;border-color:rgba(108,140,255,.35)}
+  nav a .dot{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#2c3344;flex:0 0 8px}
+  nav a.done .dot{background:var(--green);box-shadow:0 0 8px var(--green)}
+  .navsec{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);padding:16px 12px 6px;font-weight:700}
+  .progwrap{padding:10px 12px;margin-top:8px}
+  .progbar{height:8px;background:#1b1f2b;border-radius:9px;overflow:hidden}
+  .progfill{height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--green));transition:width .5s ease}
+  .progtxt{font-size:11px;color:var(--dim);margin-top:6px;text-align:center}
+  /* content */
+  section{max-width:1000px;margin:0 auto;padding:54px 40px;border-bottom:1px solid var(--line)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--acc);font-weight:700;margin-bottom:14px;padding:5px 12px;background:rgba(108,140,255,.10);border:1px solid rgba(108,140,255,.25);border-radius:30px}
+  h2.title{font-size:34px;line-height:1.15;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+  .lead{font-size:18px;color:var(--mut);margin-bottom:28px;max-width:780px}
+  h3{font-size:21px;font-weight:700;margin:34px 0 14px;display:flex;align-items:center;gap:10px}
+  h3:before{content:"";width:4px;height:20px;background:linear-gradient(var(--acc),var(--acc2));border-radius:3px}
+  h4{font-size:16px;font-weight:700;margin:22px 0 10px;color:#cdd3e4}
+  p{margin-bottom:14px;color:#d2d7e6}
+  .mut{color:var(--mut)}
+  strong{color:#fff;font-weight:700}
+  em{color:var(--gold);font-style:normal;font-weight:600}
+  /* boxes */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:18px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+  .why{background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(52,211,153,.02));border:1px solid rgba(52,211,153,.25);border-radius:14px;padding:16px 20px;margin:16px 0}
+  .why b{color:var(--green)}
+  .def{background:var(--card2);border-left:4px solid var(--acc);border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0}
+  .def .term{font-weight:800;color:#fff;font-size:15px;margin-bottom:4px}
+  .def .src{font-size:12px;color:var(--dim);font-style:italic}
+  .keep{background:linear-gradient(135deg,rgba(245,196,81,.10),rgba(245,196,81,.02));border:1px solid rgba(245,196,81,.3);border-radius:14px;padding:16px 20px;margin:18px 0}
+  .keep b{color:var(--gold)}
+  .keep .h{font-weight:800;color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
+  .trap{background:linear-gradient(135deg,rgba(251,113,133,.10),rgba(251,113,133,.02));border:1px solid rgba(251,113,133,.3);border-radius:14px;padding:14px 18px;margin:16px 0}
+  .trap .h{font-weight:800;color:var(--red);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--card2);border:1px solid var(--line);color:var(--mut);margin:2px}
+  .pill.a{color:var(--acc);border-color:rgba(108,140,255,.4)}
+  .pill.g{color:var(--green);border-color:rgba(52,211,153,.4)}
+  .pill.go{color:var(--gold);border-color:rgba(245,196,81,.4)}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--acc);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  tr:hover td{background:rgba(255,255,255,.02)}
+  ul.clean{list-style:none;margin:8px 0}
+  ul.clean li{padding:6px 0 6px 26px;position:relative;color:#d2d7e6}
+  ul.clean li:before{content:"▸";position:absolute;left:6px;color:var(--acc);font-weight:700}
+  /* SVG diagram frame */
+  .diagram{background:radial-gradient(circle at 50% 0%,#13161f,#0c0e14);border:1px solid var(--line);border-radius:16px;padding:24px;margin:22px 0;overflow-x:auto}
+  .diagram .cap{text-align:center;font-size:12px;color:var(--dim);margin-top:12px;text-transform:uppercase;letter-spacing:1px}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto}
+  /* flow boxes (css diagram) */
+  .flow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin:18px 0}
+  .flow .node{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;text-align:center;font-weight:700;font-size:14px;min-width:110px}
+  .flow .node small{display:block;font-weight:400;color:var(--dim);font-size:11px;margin-top:3px}
+  .flow .arr{color:var(--acc);font-size:22px;font-weight:700}
+  .stack{display:flex;flex-direction:column;gap:0;margin:18px 0;align-items:center}
+  /* interactive noyau */
+  .clickbox{cursor:pointer;transition:.2s}
+  .clickbox:hover{transform:translateY(-2px)}
+  .infopanel{background:var(--card2);border:1px solid var(--acc);border-radius:12px;padding:16px;margin-top:14px;min-height:60px;font-size:14px}
+  /* flashcards */
+  .fcwrap{max-width:560px;margin:24px auto}
+  .flashcard{perspective:1600px;height:300px;cursor:pointer}
+  .fcinner{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+  .flashcard.flip .fcinner{transform:rotateY(180deg)}
+  .fcface{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;border:1px solid var(--line)}
+  .fcfront{background:linear-gradient(135deg,var(--card2),var(--card))}
+  .fcback{background:linear-gradient(135deg,#1a2230,#141a26);transform:rotateY(180deg);border-color:rgba(108,140,255,.4)}
+  .fcfront .q{font-size:21px;font-weight:700}
+  .fcfront .hint{position:absolute;bottom:16px;font-size:12px;color:var(--dim)}
+  .fcback .a{font-size:15.5px;color:#dfe3ef;line-height:1.6}
+  .fctag{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--acc);margin-bottom:14px;font-weight:700}
+  .fcnav{display:flex;align-items:center;justify-content:space-between;margin-top:18px;gap:14px}
+  .btn{background:var(--card2);border:1px solid var(--line);color:var(--txt);padding:10px 18px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
+  .btn:hover{border-color:var(--acc);background:var(--card)}
+  .btn.prim{background:linear-gradient(90deg,var(--acc),var(--acc2));border:0;color:#fff}
+  .fccount{font-size:13px;color:var(--mut)}
+  .deckpick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;justify-content:center}
+  .deckpick .dk{font-size:12.5px;padding:7px 13px;border-radius:20px;cursor:pointer;background:var(--card);border:1px solid var(--line);color:var(--mut)}
+  .deckpick .dk.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+  /* quiz */
+  .q-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0}
+  .q-num{font-size:12px;color:var(--acc);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .q-txt{font-size:16.5px;font-weight:600;margin-bottom:14px}
+  .opt{display:block;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:11px 16px;margin:8px 0;cursor:pointer;transition:.15s;font-size:14.5px}
+  .opt:hover{border-color:var(--acc)}
+  .opt.correct{background:rgba(52,211,153,.15);border-color:var(--green);color:#d6ffe9}
+  .opt.wrong{background:rgba(251,113,133,.13);border-color:var(--red);color:#ffd9df}
+  .opt.disabled{pointer-events:none;opacity:.55}
+  .explain{font-size:13.5px;color:var(--mut);margin-top:10px;padding:10px 14px;background:rgba(108,140,255,.06);border-radius:9px;border-left:3px solid var(--acc);display:none}
+  .explain.show{display:block}
+  .scorebox{position:sticky;bottom:20px;background:linear-gradient(90deg,var(--acc),var(--acc2));color:#fff;padding:14px 22px;border-radius:14px;font-weight:700;text-align:center;margin-top:20px;box-shadow:var(--shadow)}
+  /* hero */
+  .hero{max-width:1000px;margin:0 auto;padding:64px 40px 40px}
+  .hero h2.title{font-size:44px}
+  .sprintgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:26px 0}
+  .sprintcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;font-size:13.5px}
+  .sprintcard .t{font-weight:700;color:#fff;margin-bottom:4px;font-size:15px}
+  .sprintcard .time{font-size:11px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+  .badge{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+  .b-red{background:rgba(251,113,133,.16);color:var(--red)}
+  .b-org{background:rgba(251,146,60,.16);color:var(--orange)}
+  .b-yel{background:rgba(245,196,81,.16);color:var(--gold)}
+  .topbar{position:sticky;top:0;z-index:40;backdrop-filter:blur(12px);background:rgba(10,11,15,.7);border-bottom:1px solid var(--line);padding:10px 40px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+  .topbar .mini{font-size:12px;color:var(--dim)}
+  .markbtn{background:var(--card2);border:1px solid var(--line);color:var(--mut);font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:9px;cursor:pointer;transition:.15s}
+  .markbtn:hover{border-color:var(--green);color:var(--green)}
+  .markbtn.done{background:rgba(52,211,153,.14);border-color:var(--green);color:var(--green)}
+  .mob{display:none}
+  @media(max-width:820px){.side{display:none}.mob{display:block}section,.hero{padding-left:20px;padding-right:20px}.topbar{padding:10px 20px}}
+  .links-graph text{font-size:11px;fill:var(--txt);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="brandhead">
+      <h1>SPRINT · MARQUE</h1>
+      <p>De zéro à l'examen</p>
+    </div>
+    <div class="progwrap">
+      <div class="progbar"><div class="progfill" id="pf"></div></div>
+      <div class="progtxt" id="pt">0 / 10 modules</div>
+    </div>
+    <div class="navsec">Parcours</div>
+    <nav id="nav">
+      <a href="#sprint" data-s="sprint"><span class="ico">🏁</span>Le plan de sprint<span class="dot"></span></a>
+      <a href="#m1" data-s="m1"><span class="ico">📜</span>1 · C'est quoi une marque<span class="dot"></span></a>
+      <a href="#m2" data-s="m2"><span class="ico">🎭</span>2 · Identité &amp; Image<span class="dot"></span></a>
+      <a href="#m3" data-s="m3"><span class="ico">🧬</span>3 · Noyau Central<span class="dot"></span></a>
+      <a href="#m4" data-s="m4"><span class="ico">💎</span>4 · Capital Marque<span class="dot"></span></a>
+      <a href="#m5" data-s="m5"><span class="ico">⚖️</span>5 · Droit &amp; INPI<span class="dot"></span></a>
+      <a href="#m6" data-s="m6"><span class="ico">🧠</span>6 · Le Consommateur<span class="dot"></span></a>
+      <a href="#m7" data-s="m7"><span class="ico">♟️</span>7 · Stratégie &amp; RBV<span class="dot"></span></a>
+      <a href="#m8" data-s="m8"><span class="ico">🚀</span>8 · EPIC · MEME · PAST<span class="dot"></span></a>
+      <a href="#m9" data-s="m9"><span class="ico">🕸️</span>9 · La carte des liens<span class="dot"></span></a>
+      <a href="#m10" data-s="m10"><span class="ico">🎯</span>10 · Cas pratiques (TD)<span class="dot"></span></a>
+    </nav>
+    <div class="navsec">S'entraîner</div>
+    <nav>
+      <a href="#flash" data-s="flash"><span class="ico">🃏</span>Flashcards<span class="dot"></span></a>
+      <a href="#quiz" data-s="quiz"><span class="ico">✅</span>Quiz noté<span class="dot"></span></a>
+    </nav>
+    <div style="padding:18px 12px;font-size:11px;color:var(--dim);line-height:1.5">Ta progression est sauvegardée automatiquement dans ce navigateur.</div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="mini" id="crumb">🏁 Le plan de sprint</div>
+      <button class="markbtn" id="markbtn">○ Marquer comme lu</button>
+    </div>
+
+    <!-- HERO / SPRINT -->
+    <div class="hero" id="sprint" data-mod>
+      <span class="eyebrow">⏱️ Examen demain · objectif : tout comprendre ce soir</span>
+      <h2 class="title">Stratégie de Marque,<br>de <span style="background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent">zéro à prêt</span> en une nuit.</h2>
+      <p class="lead">Tu n'as aucune base ? Parfait. Ce parcours part du tout début (« c'est quoi une marque ? ») et monte marche par marche jusqu'aux cas que tu auras à composer demain. Chaque notion est <strong>expliquée simplement</strong>, puis <strong>dessinée</strong> (tu es visuel → tout est en schéma), puis <strong>testée</strong>.</p>
+
+      <div class="why"><b>💡 Comment apprendre vite ?</b> Pour chaque module : (1) lis le bloc vert <em>« Pourquoi ça existe »</em> — c'est l'intuition. (2) Regarde le schéma jusqu'à pouvoir le redessiner de tête. (3) Lis le bloc or <em>« À retenir »</em>. (4) À la fin, fais les <strong>flashcards</strong> + le <strong>quiz</strong>. Marque chaque module « lu » (bouton en haut) pour suivre ta barre de progression.</p></div>
+
+      <h3>Ordre d'attaque (priorité examen)</h3>
+      <div class="sprintgrid">
+        <div class="sprintcard"><span class="badge b-red">Priorité 1</span><div class="t" style="margin-top:8px">🧬 Noyau Central</div><div class="mut">Le cas le plus probable (GO/NO&nbsp;GO). Module 3.</div></div>
+        <div class="sprintcard"><span class="badge b-red">Priorité 1</span><div class="t" style="margin-top:8px">♟️ RBV / Cabaia</div><div class="mut">Cas officiel. Module 7 + 10.</div></div>
+        <div class="sprintcard"><span class="badge b-org">Priorité 2</span><div class="t" style="margin-top:8px">🚀 EPIC·MEME·PAST</div><div class="mut">3 leviers d'activation. Module 8.</div></div>
+        <div class="sprintcard"><span class="badge b-org">Priorité 2</span><div class="t" style="margin-top:8px">🧠 TPB &amp; Fournier</div><div class="mut">Comportement conso. Module 6.</div></div>
+        <div class="sprintcard"><span class="badge b-yel">Priorité 3</span><div class="t" style="margin-top:8px">Le reste</div><div class="mut">Identité, capital, INPI, à savoir restituer.</div></div>
+      </div>
+      <p class="mut" style="font-size:14px">👉 Tu peux suivre l'ordre des modules (recommandé, ça construit la logique) <strong>ou</strong> sauter direct aux priorités 1. Commence par le module 1 juste en dessous.</p>
+    </div>
+
+    <!-- MODULE 1 -->
+    <section id="m1" data-mod>
+      <span class="eyebrow">📜 Module 1 · Séance S1</span>
+      <h2 class="title">C'est quoi une marque, vraiment ?</h2>
+      <p class="lead">Avant le marketing, avant les logos : une marque est d'abord une <strong>signature</strong>. Comprendre son évolution historique, c'est comprendre tout le reste du cours.</p>
+
+      <div class="why"><b>Pourquoi commencer par là ?</b> Tout le cours repose sur une idée : la marque a <em>grandi</em>. Elle est passée d'un simple tampon « c'est moi qui l'ai fait » à un <em>symbole</em> qui vend du rêve, puis à un <em>objet social</em> que les consommateurs co-construisent. Si tu retiens cette montée en 4 étages, tu as la colonne vertébrale.</p></div>
+
+      <h3>La marque en 4 couches (à dessiner de tête)</h3>
+      <div class="diagram">
+        <svg viewBox="0 0 760 240" role="img" aria-label="Évolution de la marque en quatre couches">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6c8cff"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+          </defs>
+          <!-- 4 stacked arrows -->
+          <g font-family="inherit">
+            <rect x="20" y="30" width="150" height="60" rx="12" fill="#1d2130" stroke="#2c3344"/>
+            <text x="95" y="56" text-anchor="middle" fill="#fff" font-weight="800" font-size="15">SIGNATURE</text>
+            <text x="95" y="76" text-anchor="middle" fill="#9aa3b8" font-size="11">« c'est moi qui l'ai fait »</text>
+
+            <path d="M178 60 L208 60" stroke="url(#g1)" stroke-width="3" marker-end="url(#ah)"/>
+            <rect x="215" y="30" width="150" height="60" rx="12" fill="#1d2130" stroke="#2c3344"/>
+            <text x="290" y="56" text-anchor="middle" fill="#fff" font-weight="800" font-size="15">GARANTIE</text>
+            <text x="290" y="76" text-anchor="middle" fill="#9aa3b8" font-size="11">traçabilité, qualité</text>
+
+            <path d="M373 60 L403 60" stroke="url(#g1)" stroke-width="3" marker-end="url(#ah)"/>
+            <rect x="410" y="30" width="150" height="60" rx="12" fill="#1d2130" stroke="#2c3344"/>
+            <text x="485" y="56" text-anchor="middle" fill="#fff" font-weight="800" font-size="15">LIEN</text>
+            <text x="485" y="76" text-anchor="middle" fill="#9aa3b8" font-size="11">vendeur silencieux</text>
+
+            <path d="M568 60 L598 60" stroke="url(#g1)" stroke-width="3" marker-end="url(#ah)"/>
+            <rect x="605" y="30" width="150" height="60" rx="12" fill="url(#g1)" stroke="none"/>
+            <text x="680" y="56" text-anchor="middle" fill="#fff" font-weight="800" font-size="15">SYMBOLE</text>
+            <text x="680" y="76" text-anchor="middle" fill="#eef" font-size="11">incarne des idéaux</text>
+          </g>
+          <!-- timeline -->
+          <line x1="20" y1="140" x2="740" y2="140" stroke="#2c3344" stroke-width="2"/>
+          <text x="20" y="170" fill="#6b7390" font-size="12">Antiquité</text>
+          <text x="290" y="170" fill="#6b7390" font-size="12">Moyen-Âge</text>
+          <text x="470" y="170" fill="#6b7390" font-size="12">Révolution industrielle</text>
+          <text x="640" y="170" fill="#6b7390" font-size="12">XXᵉ s. → aujourd'hui</text>
+          <text x="380" y="215" text-anchor="middle" fill="#f5c451" font-size="13" font-weight="700">Et aujourd'hui : 5ᵉ couche = la marque CO-CONSTRUITE (elle n'appartient plus à l'entreprise)</text>
+          <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#a855f7"/></marker></defs>
+        </svg>
+        <div class="cap">Évolution : Signature → Garantie → Lien → Symbole → Co-construction</div>
+      </div>
+
+      <div class="grid2">
+        <div class="def"><div class="term">Le « vendeur silencieux »</div><span class="src">Vance Packard</span><p style="margin:6px 0 0">Quand fabrication et vente se séparent (grands magasins), la marque recrée un <strong>lien direct</strong> entre l'industriel et le consommateur, sans vendeur humain. Le packaging « parle » à ta place.</p></div>
+        <div class="def"><div class="term">Le tournant symbolique</div><span class="src">Burnett, Ogilvy, Dichter</span><p style="margin:6px 0 0">La marque <strong>se déconnecte du produit pour incarner des idéaux</strong> (bonheur, succès, modernité). On ne vend plus un savon, on vend une vie rêvée. C'est le « décrochage » fonctionnel / aspirationnel.</p></div>
+      </div>
+
+      <div class="keep"><div class="h">⭐ À retenir</div>
+      <ul class="clean">
+        <li><strong>Définition d'origine :</strong> la marque = « un signe anthropologique fondamental ». Sa <strong>fonction première = identifier l'origine</strong>.</li>
+        <li><strong>Co-construction :</strong> aujourd'hui « la marque n'appartient plus à l'entreprise ». Elle vit dans les interactions entre <strong>6 parties prenantes</strong> : consommateurs, actionnaires, distributeurs, société civile, médias, salariés.</li>
+        <li><strong>Auteur à citer :</strong> <em>Heilbrunn, La Marque (2022)</em> — manuel de référence du cours.</li>
+      </ul></div>
+    </section>
+
+    <!-- MODULE 2 -->
+    <section id="m2" data-mod>
+      <span class="eyebrow">🎭 Module 2 · Séance S2</span>
+      <h2 class="title">Identité &amp; Image : les outils de diagnostic</h2>
+      <p class="lead">Ici on apprend à <strong>radiographier</strong> une marque. Deux modèles-stars : le prisme de Kapferer et le système d'Aaker. Plus une distinction qui revient sans arrêt : <em>identité ≠ image</em>.</p>
+
+      <div class="why"><b>L'intuition de base.</b> <b>Identité</b> = ce que la marque <em>émet</em> (ce qu'elle veut être). <b>Image</b> = ce que le consommateur <em>perçoit</em> (ce qu'il comprend). Les deux ne collent jamais parfaitement. Tout le travail du marketeur = réduire l'écart.</p></div>
+
+      <div class="flow">
+        <div class="node">MARQUE<small>(émetteur)</small></div>
+        <div class="arr">→</div>
+        <div class="node" style="border-color:var(--acc)">IDENTITÉ<small>ce qu'elle veut dire</small></div>
+        <div class="arr">→</div>
+        <div class="node" style="border-color:var(--gold)">IMAGE<small>ce qui est perçu</small></div>
+        <div class="arr">→</div>
+        <div class="node">CONSO<small>(récepteur)</small></div>
+      </div>
+
+      <h3>Le prisme d'identité de Kapferer (6 facettes)</h3>
+      <p class="mut">Un hexagone. Pôle <strong>haut</strong> = ce qui vient de la marque (émetteur). Pôle <strong>bas</strong> = ce qui touche le consommateur (destinataire). À savoir appliquer sur une marque (cas modèle du cours : <em>Nature &amp; Découvertes</em>).</p>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420" role="img" aria-label="Prisme de Kapferer">
+          <!-- hexagon outline -->
+          <polygon points="310,30 540,160 540,300 310,400 80,300 80,160" fill="none" stroke="#2c3344" stroke-width="2"/>
+          <line x1="80" y1="160" x2="540" y2="160" stroke="#262b3a" stroke-dasharray="4"/>
+          <line x1="80" y1="300" x2="540" y2="300" stroke="#262b3a" stroke-dasharray="4"/>
+          <text x="310" y="20" text-anchor="middle" fill="#6c8cff" font-size="11" font-weight="700">↑ ÉMETTEUR (la marque construit)</text>
+          <text x="310" y="416" text-anchor="middle" fill="#f5c451" font-size="11" font-weight="700">↓ DESTINATAIRE (le conso reçoit)</text>
+          <!-- facets -->
+          <g text-anchor="middle">
+            <circle cx="310" cy="80" r="6" fill="#6c8cff"/><text x="310" y="115" fill="#fff" font-weight="700" font-size="15">PHYSIQUE</text><text x="310" y="133" fill="#9aa3b8" font-size="11">caractéristiques tangibles, objet</text>
+            <circle cx="465" cy="160" r="6" fill="#6c8cff"/><text x="465" y="150" fill="#fff" font-weight="700" font-size="15">RELATION</text><text x="465" y="200" fill="#9aa3b8" font-size="11">type de lien marque–client</text>
+            <circle cx="155" cy="160" r="6" fill="#6c8cff"/><text x="155" y="150" fill="#fff" font-weight="700" font-size="15">PERSONNALITÉ</text><text x="155" y="130" fill="#9aa3b8" font-size="11">caractère, ton</text>
+            <text x="310" y="230" fill="#cdd3e4" font-weight="700" font-size="14">CULTURE</text><text x="310" y="248" fill="#9aa3b8" font-size="11">système de valeurs (cœur)</text>
+            <circle cx="465" cy="300" r="6" fill="#f5c451"/><text x="465" y="290" fill="#fff" font-weight="700" font-size="15">MENTALISATION</text><text x="465" y="335" fill="#9aa3b8" font-size="11">relation à soi-même</text>
+            <circle cx="155" cy="300" r="6" fill="#f5c451"/><text x="155" y="290" fill="#fff" font-weight="700" font-size="15">REFLET</text><text x="155" y="335" fill="#9aa3b8" font-size="11">image du conso-type</text>
+            <circle cx="310" cy="350" r="6" fill="#f5c451"/>
+          </g>
+        </svg>
+        <div class="cap">Prisme de Kapferer — Physique · Personnalité · Relation · Culture · Reflet · Mentalisation</div>
+      </div>
+
+      <div class="grid2">
+        <div class="card"><h4 style="margin-top:0">Système d'identité d'Aaker (1996)</h4><p class="mut" style="font-size:14px">4 perspectives pour voir la marque sous tous les angles :</p>
+          <ul class="clean" style="font-size:14px">
+            <li>La marque comme <strong>Produit</strong> (attributs, qualité, usages)</li>
+            <li>La marque comme <strong>Organisation</strong> (valeurs de l'entreprise)</li>
+            <li>La marque comme <strong>Personne</strong> (personnalité, relation)</li>
+            <li>La marque comme <strong>Symbole</strong> (imagerie, héritage)</li>
+          </ul>
+          <p class="mut" style="font-size:13px;margin:0">+ distinction Noyau (intemporel) / Périphérie.</p>
+        </div>
+        <div class="card"><h4 style="margin-top:0">Identifiant ≠ Marque</h4>
+          <p style="font-size:14px">« Avoir un nom déposé ≠ avoir une marque » (Heilbrunn). <strong>¾ des « marques »</strong> en grande conso ne sont que des identifiants. Deux règles-tests :</p>
+          <p><span class="pill go">Règle des 25 ans</span> il faut traverser <strong>3 générations</strong>.</p>
+          <p><span class="pill go">Règle des 5 associations</span> si on ne peut pas citer 5 associations précises &amp; différenciantes → ce n'est qu'un identifiant.</p>
+        </div>
+      </div>
+
+      <h3>Les 3 niveaux sémiotiques (Heilbrunn)</h3>
+      <div class="diagram">
+        <svg viewBox="0 0 620 260" role="img" aria-label="Trois niveaux sémiotiques">
+          <g>
+            <rect x="60" y="20" width="500" height="58" rx="10" fill="#1d2130" stroke="#6c8cff"/>
+            <text x="80" y="44" fill="#fff" font-weight="800" font-size="16">FIGURATIF</text><text x="80" y="64" fill="#9aa3b8" font-size="12">logo, packaging, nom, couleurs — « ce par quoi on la reconnaît »</text>
+            <text x="540" y="54" text-anchor="end" fill="#6c8cff" font-size="12" font-weight="700">= ESTHÉTIQUE</text>
+            <rect x="60" y="92" width="500" height="58" rx="10" fill="#1d2130" stroke="#a855f7"/>
+            <text x="80" y="116" fill="#fff" font-weight="800" font-size="16">NARRATIF</text><text x="80" y="136" fill="#9aa3b8" font-size="12">Contrat → Compétences → Performances → Sanctions — « ce à quoi elle marche »</text>
+            <rect x="60" y="164" width="500" height="58" rx="10" fill="#1d2130" stroke="#f5c451"/>
+            <text x="80" y="188" fill="#fff" font-weight="800" font-size="16">AXIOLOGIQUE</text><text x="80" y="208" fill="#9aa3b8" font-size="12">valeurs fondatrices, vision du monde, éthique — la profondeur</text>
+            <text x="540" y="198" text-anchor="end" fill="#f5c451" font-size="12" font-weight="700">= ÉTHIQUE</text>
+          </g>
+          <text x="310" y="246" text-anchor="middle" fill="#6b7390" font-size="12">De la surface (visible) vers la profondeur (valeurs)</text>
+        </svg>
+        <div class="cap">Surface → profondeur : Figuratif · Narratif · Axiologique</div>
+      </div>
+
+      <h3>Les 4 métaphores de la marque (Holt, 2004)</h3>
+      <div class="grid2">
+        <div class="card" style="margin:8px 0"><strong>🧠 Empreinte mentale</strong><p class="mut" style="font-size:13.5px;margin:6px 0 0">Un paquet d'associations (ADN, essence). Pour produits de faible implication.</p></div>
+        <div class="card" style="margin:8px 0"><strong>🤝 Partenaire</strong><p class="mut" style="font-size:13.5px;margin:6px 0 0">Une relation, une personnalité. Pour services &amp; produits spécialisés.</p></div>
+        <div class="card" style="margin:8px 0"><strong>🦠 Virale</strong><p class="mut" style="font-size:13.5px;margin:6px 0 0">Une contagion (bouche-à-oreille). Pour mode &amp; tech.</p></div>
+        <div class="card" style="margin:8px 0"><strong>🏛️ Icône culturelle</strong><p class="mut" style="font-size:13.5px;margin:6px 0 0">Performe un <strong>mythe</strong> qui résout une contradiction anthropologique. Pour produits « style de vie » (Nike, Coca).</p></div>
+      </div>
+
+      <div class="keep"><div class="h">⭐ À retenir</div>
+      <ul class="clean">
+        <li><strong>Kapferer</strong> = prisme 6 facettes (diagnostic de cohérence). <strong>Aaker</strong> = 4 perspectives × 12 (vision holistique).</li>
+        <li><strong>Patrimoine</strong> ≠ <strong>Héritage</strong> (antécédent statique) ≠ <strong>Nostalgie</strong> (doux-amer) ≠ <strong>Authenticité</strong> (fidélité à soi) ≠ <strong>Retro branding</strong>.</li>
+      </ul></div>
+      <div class="trap"><div class="h">⚠️ Piège</div>Identité (émetteur) vs Image (récepteur) : ne JAMAIS les confondre. Et « nom déposé » ne fait PAS une marque.</div>
+    </section>
+
+    <!-- MODULE 3 -->
+    <section id="m3" data-mod>
+      <span class="eyebrow">🧬 Module 3 · Séance S3 · <span style="color:var(--red)">PRIORITÉ 1</span></span>
+      <h2 class="title">Le Noyau Central — l'arme n°1</h2>
+      <p class="lead">C'est <strong>le</strong> chapitre le plus probable à l'examen (cas GO/NO&nbsp;GO). L'idée : toute marque a un <strong>cœur intouchable</strong> et une <strong>périphérie qu'on peut adapter</strong>. Savoir trier les deux = savoir décider.</p>
+
+      <div class="why"><b>L'intuition.</b> Imagine une marque comme une planète. Au centre, un <b>noyau</b> dur, stable, qui définit qui elle est — si tu y touches, elle <em>n'est plus elle-même</em>. Autour, une <b>croûte périphérique</b> souple qui peut changer (logo, goûts, formats) sans trahir le cœur. C'est la <b>théorie d'Abric</b>, née de la psychologie sociale (Moscovici).</p></div>
+
+      <h3>Les définitions exactes (à connaître mot pour mot)</h3>
+      <div class="def"><div class="term">Représentation sociale</div><span class="src">Moscovici, 1961</span><p style="margin:6px 0 0">« Une forme de <strong>connaissance socialement élaborée et partagée</strong>, ayant une <strong>visée pratique</strong> et concourant à la <strong>construction d'une réalité commune</strong> à un ensemble social. »</p></div>
+      <p class="mut" style="font-size:14px">→ Puis <strong>Abric</strong> vient organiser cette représentation en 2 systèmes :</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 560 380" role="img" aria-label="Noyau central et périphérie">
+          <circle cx="280" cy="190" r="170" fill="rgba(251,113,133,.04)" stroke="#fb7185" stroke-dasharray="5" stroke-width="1.5"/>
+          <circle cx="280" cy="190" r="95" fill="rgba(108,140,255,.10)" stroke="#6c8cff" stroke-width="2"/>
+          <text x="280" y="180" text-anchor="middle" fill="#fff" font-weight="800" font-size="17">NOYAU</text>
+          <text x="280" y="202" text-anchor="middle" fill="#fff" font-weight="800" font-size="17">CENTRAL</text>
+          <text x="280" y="226" text-anchor="middle" fill="#9aa3b8" font-size="11">ADN non négociable</text>
+          <!-- periphery labels -->
+          <g font-size="11" fill="#cdd3e4" text-anchor="middle">
+            <rect x="200" y="40" width="160" height="26" rx="13" fill="#1d2130" stroke="#fb7185"/><text x="280" y="57">SYSTÈME PÉRIPHÉRIQUE</text>
+            <text x="430" y="120" fill="#fb7185" font-weight="700">logo</text>
+            <text x="120" y="120" fill="#fb7185" font-weight="700">formats</text>
+            <text x="440" y="270" fill="#fb7185" font-weight="700">goûts</text>
+            <text x="110" y="270" fill="#fb7185" font-weight="700">canaux</text>
+          </g>
+          <!-- functions -->
+          <text x="280" y="350" text-anchor="middle" fill="#6c8cff" font-size="12" font-weight="700">Fonctions : génératrice + organisatrice (zone ROUGE = ne pas toucher)</text>
+          <text x="280" y="370" text-anchor="middle" fill="#fb7185" font-size="12" font-weight="700">Fonctions : protection + adaptation (zone VERTE = adaptable)</text>
+        </svg>
+        <div class="cap">Clique les zones ci-dessous pour voir leur rôle</div>
+      </div>
+      <div class="grid2">
+        <div class="card clickbox" onclick="showNoyau('noy')" style="border-color:var(--acc)"><strong style="color:var(--acc)">🔵 Noyau central</strong><p class="mut" style="font-size:13.5px;margin:6px 0 0">stable · consensuel · abstrait · inconditionnel</p></div>
+        <div class="card clickbox" onclick="showNoyau('per')" style="border-color:var(--red)"><strong style="color:var(--red)">🔴 Système périphérique</strong><p class="mut" style="font-size:13.5px;margin:6px 0 0">flexible · contextuel · concret · conditionnel</p></div>
+      </div>
+      <div class="infopanel" id="noyauInfo">👆 Clique une des deux zones pour afficher son rôle détaillé.</div>
+
+      <h3>La méthode du TD (à appliquer sur un cas)</h3>
+      <p class="mut">On te donnera une marque (Nutella, Apple…) et une extension. Tu dois trancher <strong>GO / NO GO</strong>. Voici la procédure notée :</p>
+      <div class="flow" style="flex-direction:column;align-items:stretch;max-width:600px;margin:18px auto">
+        <div class="node" style="text-align:left;min-width:auto">1️⃣ <strong>Lister</strong> toutes les associations spontanées de la marque</div>
+        <div class="arr">↓</div>
+        <div class="node" style="text-align:left;min-width:auto">2️⃣ <strong>Qualifier</strong> chacune : Nature (F/S/E) · Intensité 0-10 · Unicité 0-10 · Valence −10/+10</div>
+        <div class="arr">↓</div>
+        <div class="node" style="text-align:left;min-width:auto;border-color:var(--acc)">3️⃣ <strong>Trancher</strong> — Noyau si : <em>Intensité ≥ 8 ET (Unicité ≥ 7 OU symbolique-clé) ET valence + stable ET la marque n'a plus de sens sans elle</em></div>
+        <div class="arr">↓</div>
+        <div class="node" style="text-align:left;min-width:auto">4️⃣ <strong>Test de résistance</strong> (3 questions) : supprimable sans perte d'identité ? valable partout/toujours ? guide les décisions ? → <em>3 « Non » = périphérie · 2-3 « Oui » = noyau</em></div>
+        <div class="arr">↓</div>
+        <div class="node" style="text-align:left;min-width:auto;border-color:var(--gold)">5️⃣ <strong>Décider</strong> GO / NO GO / GO sous conditions + plan de lancement</div>
+      </div>
+      <div class="card"><h4 style="margin-top:0">📋 La grille de notation (TD3, /20)</h4>
+      <table><tr><th>Critère</th><th>Points</th></tr>
+      <tr><td>Identification du noyau central</td><td>/6</td></tr>
+      <tr><td>Diagnostic de l'extension (gamme ou marque ?)</td><td>/4</td></tr>
+      <tr><td>Décision + cohérence</td><td>/4</td></tr>
+      <tr><td>Plan d'action</td><td>/4</td></tr>
+      <tr><td>Qualité de l'argumentation</td><td>/2</td></tr></table></div>
+
+      <h3>Extensions : la matrice de croissance</h3>
+      <div class="diagram">
+        <svg viewBox="0 0 520 420" role="img" aria-label="Matrice de croissance">
+          <text x="260" y="20" text-anchor="middle" fill="#6b7390" font-size="12">MARQUE →</text>
+          <text x="18" y="220" fill="#6b7390" font-size="12" transform="rotate(-90 18 220)" text-anchor="middle">MARCHÉ →</text>
+          <text x="150" y="42" text-anchor="middle" fill="#9aa3b8" font-size="12">Même marque</text>
+          <text x="385" y="42" text-anchor="middle" fill="#9aa3b8" font-size="12">Nouvelle marque</text>
+          <text x="45" y="135" fill="#9aa3b8" font-size="12" transform="rotate(-90 45 135)" text-anchor="middle">Même marché</text>
+          <text x="45" y="320" fill="#9aa3b8" font-size="12" transform="rotate(-90 45 320)" text-anchor="middle">Nouveau marché</text>
+          <rect x="70" y="55" width="170" height="150" rx="12" fill="rgba(108,140,255,.10)" stroke="#6c8cff"/>
+          <text x="155" y="120" text-anchor="middle" fill="#fff" font-weight="800" font-size="15">Extension</text><text x="155" y="140" text-anchor="middle" fill="#fff" font-weight="800" font-size="15">de GAMME</text><text x="155" y="165" text-anchor="middle" fill="#9aa3b8" font-size="11">Coca light/zero</text>
+          <rect x="255" y="55" width="170" height="150" rx="12" fill="#161922" stroke="#2c3344"/>
+          <text x="340" y="130" text-anchor="middle" fill="#cdd3e4" font-weight="700" font-size="14">Multimarques</text><text x="340" y="152" text-anchor="middle" fill="#9aa3b8" font-size="11">Lexus / Nissan</text>
+          <rect x="70" y="220" width="170" height="150" rx="12" fill="rgba(168,85,247,.10)" stroke="#a855f7"/>
+          <text x="155" y="285" text-anchor="middle" fill="#fff" font-weight="800" font-size="15">Extension</text><text x="155" y="305" text-anchor="middle" fill="#fff" font-weight="800" font-size="15">de MARQUE</text><text x="155" y="330" text-anchor="middle" fill="#9aa3b8" font-size="11">Bic : stylos→rasoirs</text>
+          <rect x="255" y="220" width="170" height="150" rx="12" fill="#161922" stroke="#2c3344"/>
+          <text x="340" y="295" text-anchor="middle" fill="#cdd3e4" font-weight="700" font-size="14">Diversification</text><text x="340" y="317" text-anchor="middle" fill="#9aa3b8" font-size="11">Groupe Danone</text>
+        </svg>
+        <div class="cap">Gamme = même marché · Extension de marque = nouveau marché</div>
+      </div>
+      <div class="grid2">
+        <div class="card"><strong>Extension de GAMME</strong><p class="mut" style="font-size:13.5px">Même marque, <strong>même</strong> catégorie. Nouvelles variantes (goût, format, « zéro »). Horizontale (même niveau de prix) ou verticale (montée en gamme, ex. Levi's Lot n°1).</p></div>
+        <div class="card"><strong>Extension de MARQUE</strong><p class="mut" style="font-size:13.5px">Même marque, <strong>autre</strong> catégorie. Continue = transfert de savoir-faire (Canon : optique→photo). Discontinue = transfert de prestige (Montblanc : stylos→montres).</p></div>
+      </div>
+      <div class="keep"><div class="h">⭐ À retenir</div><strong>Zone rouge</strong> (toucher au noyau) = « ça équivaut à changer de marque ». <strong>Zone verte</strong> (périphérie) = adaptation acceptable. Un changement de logo passe SI il modernise sans contredire les valeurs.</div>
+      <div class="trap"><div class="h">⚠️ Pièges</div><strong>Moscovici</strong> = représentation sociale (1961). <strong>Abric</strong> = noyau central. Ne pas inverser. Gamme (même marché) ≠ Marque (nouveau marché).</div>
+    </section>
+
+    <!-- MODULE 4 -->
+    <section id="m4" data-mod>
+      <span class="eyebrow">💎 Module 4 · Séance S4</span>
+      <h2 class="title">Le Capital Marque (Brand Equity)</h2>
+      <p class="lead">Pourquoi deux produits identiques se vendent à des prix très différents ? Réponse : le <strong>capital-marque</strong> — la valeur que la marque ajoute, qui vit dans la tête du consommateur.</p>
+
+      <div class="why"><b>L'intuition.</b> Mets un Coca dans une bouteille sans étiquette : même goût, mais tu paies moins, tu en parles moins. La différence = le capital-marque (CBBE). C'est <b>l'effet de la marque sur ta réaction</b> aux actions marketing.</p></div>
+
+      <div class="def"><div class="term">CBBE — Consumer-Based Brand Equity</div><span class="src">Keller, 1993</span><p style="margin:6px 0 0">« <strong>L'effet différentiel de la connaissance de la marque sur la réponse du consommateur</strong> aux actions marketing. »</p></div>
+
+      <h3>La pyramide des 4 composants</h3>
+      <div class="diagram">
+        <svg viewBox="0 0 560 320" role="img" aria-label="Pyramide CBBE">
+          <polygon points="280,20 510,290 50,290" fill="none" stroke="#2c3344" stroke-width="1.5"/>
+          <line x1="166" y1="155" x2="394" y2="155" stroke="#262b3a"/>
+          <line x1="108" y1="223" x2="452" y2="223" stroke="#262b3a"/>
+          <line x1="223" y1="88" x2="337" y2="88" stroke="#262b3a"/>
+          <text x="280" y="62" text-anchor="middle" fill="#f5c451" font-weight="800" font-size="15">FIDÉLITÉ</text><text x="280" y="78" text-anchor="middle" fill="#9aa3b8" font-size="10">le sommet</text>
+          <text x="280" y="128" text-anchor="middle" fill="#a855f7" font-weight="800" font-size="15">QUALITÉ PERÇUE</text>
+          <text x="280" y="195" text-anchor="middle" fill="#6c8cff" font-weight="800" font-size="15">IMAGE (associations)</text>
+          <text x="280" y="262" text-anchor="middle" fill="#34d399" font-weight="800" font-size="15">NOTORIÉTÉ</text><text x="280" y="280" text-anchor="middle" fill="#9aa3b8" font-size="10">la base — sans elle, rien</text>
+          <text x="530" y="160" text-anchor="end" fill="#6b7390" font-size="11">↑ on construit</text>
+          <text x="530" y="176" text-anchor="end" fill="#6b7390" font-size="11">de bas en haut</text>
+        </svg>
+        <div class="cap">Notoriété → Image → Qualité perçue → Fidélité</div>
+      </div>
+      <table>
+        <tr><th>Composant</th><th>Ce que c'est</th></tr>
+        <tr><td><strong>Notoriété</strong></td><td>Capacité à identifier la marque. 2 niveaux : reconnaissance / rappel.</td></tr>
+        <tr><td><strong>Image</strong></td><td>Associations mentales (fonctionnelles / symboliques / émotionnelles).</td></tr>
+        <tr><td><strong>Qualité perçue</strong></td><td>Jugement d'excellence — ≠ qualité objective.</td></tr>
+        <tr><td><strong>Fidélité</strong></td><td>Attachement durable. Comportementale (rachat) vs attitudinale (préférence).</td></tr>
+      </table>
+
+      <h3>Le paper à connaître : Pfeifer et al. (2025)</h3>
+      <p class="mut">Étudie comment le capital-marque influence la décision de <strong>prolonger une marque déposée</strong>. Deux dimensions, deux effets opposés (résultat <em>contre-intuitif</em> = piège classique) :</p>
+      <div class="grid2">
+        <div class="card" style="border-color:var(--green)"><strong style="color:var(--green)">RS — Relevant Stature ✅</strong><p style="font-size:14px">Connaissance + Estime + Pertinence.<br><strong>Effet POSITIF</strong> sur la prolongation. « Force tranquille » : la notoriété rassure, réduit le risque → on garde la marque.</p></div>
+        <div class="card" style="border-color:var(--red)"><strong style="color:var(--red)">ED — Energized Differentiation ❌</strong><p style="font-size:14px">Unicité + Dynamisme + Innovation.<br><strong>Effet NÉGATIF</strong>. « Piège de la niche » (Porter) : trop différencié = segment étroit, fragile, coûteux → on abandonne plus souvent.</p></div>
+      </div>
+      <div class="keep"><div class="h">⭐ À retenir</div>Reco managériale de Pfeifer : pour protéger une marque <strong>différenciée</strong>, déposer des <strong>logos / couleurs</strong> (brand-association marks) → ça atténue l'effet négatif de l'ED. <em>Lien direct avec l'INPI (module 5) et l'arrêt Louboutin.</em></div>
+    </section>
+
+    <!-- MODULE 5 -->
+    <section id="m5" data-mod>
+      <span class="eyebrow">⚖️ Module 5 · Séance S5</span>
+      <h2 class="title">Droit de la marque &amp; INPI</h2>
+      <p class="lead">La marque est un <strong>actif juridique</strong>. Ici : comment la protéger, à quelles conditions, et la procédure de dépôt (l'examen peut demander une simulation).</p>
+
+      <div class="why"><b>L'intuition.</b> Déposer une marque te donne un <b>monopole de 10 ans (renouvelable à l'infini)</b> sur un territoire. Mais attention : tout signe ne peut pas être protégé. Il doit passer 4 tests.</p></div>
+
+      <h3>Les 4 piliers de validité</h3>
+      <div class="grid2">
+        <div class="card" style="border-color:var(--acc)"><strong>① Distinctive</strong><p class="mut" style="font-size:13.5px">Ni générique, ni descriptive. « Pomme » pour ordinateurs ✅ / « Pure laine » pour tapis ❌</p></div>
+        <div class="card" style="border-color:var(--acc)"><strong>② Licite</strong><p class="mut" style="font-size:13.5px">Conforme à l'ordre public, pas de symboles officiels.</p></div>
+        <div class="card" style="border-color:var(--acc)"><strong>③ Non-déceptive</strong><p class="mut" style="font-size:13.5px">Ne trompe pas le consommateur.</p></div>
+        <div class="card" style="border-color:var(--acc)"><strong>④ Disponible</strong><p class="mut" style="font-size:13.5px">Libre de droits antérieurs (recherche d'antériorité).</p></div>
+      </div>
+      <p class="mut" style="font-size:14px">Échelle de distinctivité (du + fort au + faible) : <span class="pill g">Fantaisiste</span> → <span class="pill a">Évocatrice</span> → <span class="pill">Descriptive</span> → <span class="pill" style="color:var(--red)">Générique</span></p>
+
+      <h3>La procédure de dépôt (5 étapes)</h3>
+      <div class="flow">
+        <div class="node">Dépôt<small>identité, classes</small></div><div class="arr">→</div>
+        <div class="node">Publication<small>au BOPI</small></div><div class="arr">→</div>
+        <div class="node">Opposition<small>tiers contestent</small></div><div class="arr">→</div>
+        <div class="node">Examen<small>de fond INPI</small></div><div class="arr">→</div>
+        <div class="node" style="border-color:var(--green)">Enregistrement</div>
+      </div>
+      <div class="card"><p style="margin:0;font-size:14px">📌 <strong>Classification de Nice</strong> = 45 classes de produits/services (ex. classe 25 = vêtements). La redevance dépend du <strong>nombre de classes</strong>. <br>📌 <strong>L'INPI ne garantit PAS l'absence de conflit</strong> — c'est au titulaire de surveiller. Non-usage → risque de déchéance.</p></div>
+
+      <h3>Deux arrêts à citer</h3>
+      <div class="grid2">
+        <div class="card"><strong>👠 Louboutin (CJUE 2018)</strong><p style="font-size:14px">La semelle rouge n'est PAS une « forme » mais une <strong>marque de position</strong> (couleur + emplacement) → validée. Échappe à l'Article 3 de la directive.</p></div>
+        <div class="card"><strong>👜 Chanel / Jonak (2024)</strong><p style="font-size:14px"><strong>Parasitisme</strong> : reprendre les codes d'une marque réputée = captation déloyale de sa valeur. Condamné.</p></div>
+      </div>
+      <div class="keep"><div class="h">⭐ À retenir</div>Les 4 piliers (D-L-N-D), la procédure en 5 étapes, et « marque de position ». Pour la commission INPI : noter similarité signes /5, produits /5, public, risque global /5 + <strong>motivation 5 lignes min</strong>.</div>
+    </section>
+
+    <!-- MODULE 6 -->
+    <section id="m6" data-mod>
+      <span class="eyebrow">🧠 Module 6 · Séance S6 · <span style="color:var(--orange)">PRIORITÉ 2</span></span>
+      <h2 class="title">Le Consommateur (n'est pas rationnel)</h2>
+      <p class="lead">Le client ne décide pas avec sa raison. Quatre grilles pour comprendre : Kahneman (biais), Ajzen (l'action), Cialdini (l'influence), Fournier (la relation).</p>
+
+      <h3>Système 1 / Système 2 (Kahneman)</h3>
+      <div class="grid2">
+        <div class="card" style="border-color:var(--orange)"><strong style="color:var(--orange)">⚡ Système 1 — « le pilote »</strong><p style="font-size:14px">Rapide, intuitif, émotionnel, automatique. C'est lui qui décide presque tout. Les <strong>biais</strong> sont ses pièges.</p></div>
+        <div class="card" style="border-color:var(--acc)"><strong style="color:var(--acc)">🐢 Système 2 — « le passager »</strong><p style="font-size:14px">Lent, analytique, effortful. Souvent il ne fait que <em>justifier</em> après coup la décision du Système 1.</p></div>
+      </div>
+      <p class="mut" style="font-size:14px"><strong>Biais à savoir relier à un levier marketing :</strong> <span class="pill">ancrage</span><span class="pill">cadrage (framing)</span><span class="pill">disponibilité</span><span class="pill">aversion à la perte</span><span class="pill">effet de dotation</span><span class="pill">halo</span><span class="pill">WYSIATI</span></p>
+
+      <h3>La TPB / TAP — Théorie de l'Action Planifiée (Ajzen 1991) <span style="color:var(--orange)">★</span></h3>
+      <p class="mut">L'arme n°3. Modèle qui prédit le comportement. À savoir schématiser ET appliquer (cas « Emma part en échange ? »).</p>
+      <div class="diagram">
+        <svg viewBox="0 0 640 250" role="img" aria-label="Théorie de l'action planifiée">
+          <g text-anchor="middle">
+            <rect x="20" y="30" width="160" height="48" rx="10" fill="#1d2130" stroke="#34d399"/><text x="100" y="52" fill="#fff" font-weight="700" font-size="14">ATTITUDE</text><text x="100" y="69" fill="#9aa3b8" font-size="10">est-ce désirable ?</text>
+            <rect x="20" y="95" width="160" height="48" rx="10" fill="#1d2130" stroke="#6c8cff"/><text x="100" y="117" fill="#fff" font-weight="700" font-size="14">NORME SUBJECTIVE</text><text x="100" y="134" fill="#9aa3b8" font-size="10">les autres approuvent ?</text>
+            <rect x="20" y="160" width="160" height="48" rx="10" fill="#1d2130" stroke="#a855f7"/><text x="100" y="182" fill="#fff" font-weight="700" font-size="14">CONTRÔLE PERÇU</text><text x="100" y="199" fill="#9aa3b8" font-size="10">je peux le faire ?</text>
+            <path d="M185 54 C230 54 240 105 280 115" stroke="#2c3344" stroke-width="2" fill="none"/>
+            <path d="M185 119 L280 119" stroke="#2c3344" stroke-width="2" fill="none"/>
+            <path d="M185 184 C230 184 240 130 280 123" stroke="#2c3344" stroke-width="2" fill="none"/>
+            <rect x="285" y="92" width="150" height="54" rx="12" fill="url(#g1)"/><text x="360" y="124" fill="#fff" font-weight="800" font-size="16">INTENTION</text>
+            <path d="M438 119 L498 119" stroke="#6c8cff" stroke-width="3" marker-end="url(#ah)"/>
+            <rect x="500" y="92" width="125" height="54" rx="12" fill="#1d2130" stroke="#f5c451"/><text x="562" y="124" fill="#fff" font-weight="800" font-size="15">COMPORTEMENT</text>
+          </g>
+          <text x="320" y="235" text-anchor="middle" fill="#6b7390" font-size="11">TPB = TRA + le « contrôle comportemental perçu »</text>
+        </svg>
+        <div class="cap">Attitude + Norme + Contrôle perçu → Intention → Comportement</div>
+      </div>
+
+      <h3>Cialdini — les 6 leviers d'influence</h3>
+      <div class="grid3">
+        <div class="card" style="margin:6px 0;padding:14px"><strong>👥 Preuve sociale</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">on imite les autres</p></div>
+        <div class="card" style="margin:6px 0;padding:14px"><strong>🎓 Autorité</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">on suit les experts</p></div>
+        <div class="card" style="margin:6px 0;padding:14px"><strong>⏳ Rareté</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">FOMO, urgence</p></div>
+        <div class="card" style="margin:6px 0;padding:14px"><strong>🔗 Engagement</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">cohérence avec le passé</p></div>
+        <div class="card" style="margin:6px 0;padding:14px"><strong>🎁 Réciprocité</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">rendre la pareille</p></div>
+        <div class="card" style="margin:6px 0;padding:14px"><strong>❤️ Sympathie</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">on dit oui à qui on aime</p></div>
+      </div>
+      <p class="mut" style="font-size:13.5px">💡 Un <strong>influenceur</strong> = Autorité + Similarité + Preuve sociale en même temps → il agit sur les <strong>normes subjectives</strong> de la TPB.</p>
+
+      <h3>Fournier (1998) — la marque comme partenaire</h3>
+      <p class="mut">On entretient avec les marques des <strong>relations</strong> comme avec des personnes (animisme). On mesure leur qualité avec le <strong>BRQ — Brand Relationship Quality</strong>, 6 dimensions :</p>
+      <div class="diagram">
+        <svg viewBox="0 0 600 180" role="img" aria-label="Six dimensions du BRQ">
+          <g text-anchor="middle" font-size="12.5">
+            <circle cx="100" cy="60" r="44" fill="rgba(168,85,247,.10)" stroke="#a855f7"/><text x="100" y="58" fill="#fff" font-weight="700">Amour /</text><text x="100" y="74" fill="#fff" font-weight="700">Passion</text>
+            <circle cx="250" cy="60" r="44" fill="rgba(108,140,255,.10)" stroke="#6c8cff"/><text x="250" y="58" fill="#fff" font-weight="700">Connexion</text><text x="250" y="74" fill="#fff" font-weight="700">au soi</text>
+            <circle cx="400" cy="60" r="44" fill="rgba(52,211,153,.10)" stroke="#34d399"/><text x="400" y="58" fill="#fff" font-weight="700">Inter-</text><text x="400" y="74" fill="#fff" font-weight="700">dépendance</text>
+            <circle cx="160" cy="135" r="40" fill="rgba(245,196,81,.10)" stroke="#f5c451"/><text x="160" y="140" fill="#fff" font-weight="700">Engagement</text>
+            <circle cx="310" cy="135" r="40" fill="rgba(34,211,238,.10)" stroke="#22d3ee"/><text x="310" y="140" fill="#fff" font-weight="700">Intimité</text>
+            <circle cx="490" cy="115" r="46" fill="rgba(251,113,133,.10)" stroke="#fb7185"/><text x="490" y="112" fill="#fff" font-weight="700">Qualité du</text><text x="490" y="128" fill="#fff" font-weight="700">partenaire</text>
+          </g>
+        </svg>
+        <div class="cap">Les 6 dimensions du BRQ (Fournier 1998)</div>
+      </div>
+      <div class="keep"><div class="h">⭐ À retenir</div>La <strong>fidélité</strong> du module 4 = une relation de qualité (BRQ). Belk = « Soi étendu » (nous sommes ce que nous possédons). Bourdieu = « Distinction » (consommer pour se classer).</div>
+    </section>
+
+    <!-- MODULE 7 -->
+    <section id="m7" data-mod>
+      <span class="eyebrow">♟️ Module 7 · Séance S7a · <span style="color:var(--red)">PRIORITÉ 1</span></span>
+      <h2 class="title">Stratégie &amp; RBV — l'arme n°2</h2>
+      <p class="lead">D'où vient l'avantage d'une marque ? Pas du marché — de ses <strong>ressources internes</strong>. C'est la RBV, le cadre du cas Cabaia.</p>
+
+      <div class="why"><b>L'intuition.</b> Deux marques sur le même marché : pourquoi l'une gagne durablement ? La RBV répond : parce qu'elle possède des <b>ressources</b> que les autres ne peuvent pas copier (sa communauté, sa data, son design, sa culture). <b>Une marque = un portefeuille de ressources.</b></p></div>
+
+      <h3>Distinction fondamentale : Stratégie ≠ Activation</h3>
+      <div class="grid2">
+        <div class="card" style="border-color:var(--acc)"><strong style="color:var(--acc)">STRATÉGIE</strong><p style="font-size:14px">Cohérence &amp; différenciation. Positionnement, proposition de valeur, ressources clés. <em>Le fond.</em></p></div>
+        <div class="card" style="border-color:var(--gold)"><strong style="color:var(--gold)">ACTIVATION</strong><p style="font-size:14px">Expression &amp; visibilité. Campagnes, social media, influence, contenus. <em>La forme.</em></p></div>
+      </div>
+
+      <h3>Le test VRIN (Barney 1991)</h3>
+      <p class="mut">Une ressource crée un avantage <strong>durable</strong> seulement si elle coche les 4 :</p>
+      <div class="diagram">
+        <svg viewBox="0 0 600 130" role="img" aria-label="VRIN">
+          <g text-anchor="middle">
+            <rect x="20" y="30" width="130" height="70" rx="12" fill="#1d2130" stroke="#34d399"/><text x="85" y="60" fill="#34d399" font-weight="800" font-size="24">V</text><text x="85" y="84" fill="#cdd3e4" font-size="11">aluable (précieuse)</text>
+            <rect x="165" y="30" width="130" height="70" rx="12" fill="#1d2130" stroke="#6c8cff"/><text x="230" y="60" fill="#6c8cff" font-weight="800" font-size="24">R</text><text x="230" y="84" fill="#cdd3e4" font-size="11">are</text>
+            <rect x="310" y="30" width="130" height="70" rx="12" fill="#1d2130" stroke="#a855f7"/><text x="375" y="60" fill="#a855f7" font-weight="800" font-size="24">I</text><text x="375" y="84" fill="#cdd3e4" font-size="11">nimitable</text>
+            <rect x="455" y="30" width="130" height="70" rx="12" fill="#1d2130" stroke="#f5c451"/><text x="520" y="60" fill="#f5c451" font-weight="800" font-size="24">N</text><text x="520" y="84" fill="#cdd3e4" font-size="11">on-substituable</text>
+          </g>
+        </svg>
+        <div class="cap">VRIN — et VRIO = VRIN + Organisé pour capter la valeur</div>
+      </div>
+
+      <h3>La chaîne d'alignement (le pont vers l'activation)</h3>
+      <div class="flow">
+        <div class="node" style="border-color:var(--green)">RESSOURCES<small>VRIN</small></div><div class="arr">→</div>
+        <div class="node" style="border-color:var(--acc)">STRATÉGIE</div><div class="arr">→</div>
+        <div class="node">PLATEFORME</div><div class="arr">→</div>
+        <div class="node" style="border-color:var(--gold)">ACTIVATION<small>EPIC·MEME·PAST</small></div>
+      </div>
+
+      <div class="card"><h4 style="margin-top:0">📦 Cas Cabaia (à connaître)</h4><p style="font-size:14px"><strong>DNVB</strong> (Digitally Native Vertical Brand) française, sacs personnalisables. Part de marché FR ≈ <strong>5 %</strong> (CA ≈ 28 M€ / marché ≈ 530-616 M€). Avantage durable car le <strong>bundle</strong> (communauté + co-création + design + verticalité + valeurs RSE) est <em>socialement complexe → inimitable</em>. Modèle « Brand as a Service ». Échappe au <strong>competitive convergence trap</strong> (Porter : quand tous les concurrents finissent identiques) par sa différenciation identitaire.</p></div>
+      <div class="keep"><div class="h">⭐ À retenir</div>RBV = avantage <strong>interne</strong>. Treacy &amp; Wiersema (3 disciplines : excellence opérationnelle / leadership produit / intimité client) = niveau <strong>marché</strong>. Complémentaires. Le vrai risque contemporain = <strong>substituabilité</strong>, pas invisibilité.</div>
+    </section>
+
+    <!-- MODULE 8 -->
+    <section id="m8" data-mod>
+      <span class="eyebrow">🚀 Module 8 · Séance S8 · <span style="color:var(--orange)">PRIORITÉ 2</span></span>
+      <h2 class="title">Activation : EPIC · MEME · PAST</h2>
+      <p class="lead">« Rendre visible l'invisible ». Trois leviers pour activer une stratégie de marque. <strong>Attention :</strong> un seul est un acronyme (EPIC). MEME = le mot « mème ». PAST = la thématique du passé.</p>
+
+      <h3>① EPIC — traduire la stratégie en visuel (Scholz 2025)</h3>
+      <p class="mut">Méthode pour transformer une marque abstraite en images concrètes et différenciantes, via les <strong>archétypes</strong>. 4 étapes :</p>
+      <div class="diagram">
+        <svg viewBox="0 0 560 300" role="img" aria-label="Pyramide EPIC">
+          <polygon points="280,20 500,270 60,270" fill="none" stroke="#2c3344" stroke-width="1.5"/>
+          <line x1="170" y1="145" x2="390" y2="145" stroke="#262b3a"/>
+          <line x1="115" y1="207" x2="445" y2="207" stroke="#262b3a"/>
+          <line x1="225" y1="83" x2="335" y2="83" stroke="#262b3a"/>
+          <text x="280" y="58" text-anchor="middle" fill="#34d399" font-weight="800" font-size="15">E — Essence</text><text x="280" y="74" text-anchor="middle" fill="#9aa3b8" font-size="10">la raison d'être</text>
+          <text x="280" y="120" text-anchor="middle" fill="#6c8cff" font-weight="800" font-size="15">P — Personify</text><text x="280" y="136" text-anchor="middle" fill="#9aa3b8" font-size="10">archétypes (héros, sage…)</text>
+          <text x="280" y="182" text-anchor="middle" fill="#a855f7" font-weight="800" font-size="15">I — Inflect</text><text x="280" y="198" text-anchor="middle" fill="#9aa3b8" font-size="10">thèmes pour éviter le cliché</text>
+          <text x="280" y="244" text-anchor="middle" fill="#f5c451" font-weight="800" font-size="15">C — Catalogue (via SMART)</text>
+        </svg>
+        <div class="cap">EPIC : Essence → Personify → Inflect → Catalogue</div>
+      </div>
+      <div class="card"><strong>L'instrument SMART</strong> (sous-acronyme — pour cataloguer les éléments visuels) :<p style="margin:8px 0 0;font-size:14px"><span class="pill a">S</span>ymbols · <span class="pill a">M</span>ovements · <span class="pill a">A</span>reas (zones de la scène) · <span class="pill a">R</span>elations (couleur, ligne, forme, cadrage, lumière) · <span class="pill a">T</span>one. <br><span class="mut">Cas du paper : Rabble Wine (« wine for everybody », archétypes Regular Guy + Jester).</span></p></div>
+
+      <h3>② MEME — le branding « dé-brandé » (Marty 2025)</h3>
+      <p class="mut">Faire du branding <strong>sans avoir l'air de faire de la pub</strong>. Origine du concept : Dawkins (1976). 3 propriétés :</p>
+      <div class="grid3">
+        <div class="card" style="margin:6px 0"><strong>① Populaire &amp; fédérateur</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">ancrage dans l'actu (<em>newsjacking</em> macro/micro), tutoiement, effet de réel</p></div>
+        <div class="card" style="margin:6px 0"><strong>② Poreux, jouable &amp; viral</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">bricolage, partage, re-gram (digital labor / fanadvertising)</p></div>
+        <div class="card" style="margin:6px 0"><strong>③ Branding dépublicitarisé</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">esthétique brute, « contrôle du décontrôle » (Cardon)</p></div>
+      </div>
+
+      <h3>③ PAST — rendre la longévité visible (Pecot et al. 2022)</h3>
+      <p class="mut">Comment montrer visuellement qu'une marque est ancienne. Concept-clé : le <strong>« visual mix »</strong> = la sélection / le dosage / l'articulation des codes (dérivé du marketing mix de Borden). Trop = « fall into farce ».</p>
+      <div class="grid2">
+        <div class="card"><strong>6 codes visuels</strong><p style="font-size:13.5px;margin:6px 0 0"><span class="pill">Illustrations (82%)</span><span class="pill">Typographie</span><span class="pill">Ornements</span><span class="pill">Couleurs</span><span class="pill">Textures/usure</span><span class="pill">Photographie N&amp;B</span></p></div>
+        <div class="card"><strong>4 thèmes (typologie)</strong>
+          <ul class="clean" style="font-size:13.5px;margin:6px 0 0">
+            <li><strong>Legitimizing</strong> (56%) — continuité = compétence</li>
+            <li><strong>Humorous</strong> (41%) — autodérision = « fun donc moderne »</li>
+            <li><strong>Nostalgic</strong> (24%) — refuge contre le présent</li>
+            <li><strong>Aesthetic</strong> (28%) — univers stylistique du passé</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trap"><div class="h">⚠️ Pièges</div>① Seul EPIC est un acronyme. ② Le SMART de Scholz = <strong>S</strong>ymbols/<strong>M</strong>ovements/<strong>A</strong>reas/<strong>R</strong>elations/<strong>T</strong>one — PAS le SMART de gestion de projet. ③ Nostalgic (opposition au présent) ≠ Legitimizing (continuité).</div>
+    </section>
+
+    <!-- MODULE 9 -->
+    <section id="m9" data-mod>
+      <span class="eyebrow">🕸️ Module 9</span>
+      <h2 class="title">La carte des liens</h2>
+      <p class="lead">L'examen valorise les <strong>ponts</strong> entre notions. Voici comment tout se connecte — à ressortir en intro/conclusion de copie.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 760 460" class="links-graph" role="img" aria-label="Carte des liens du cours">
+          <!-- edges -->
+          <g stroke="#2c3344" stroke-width="1.6">
+            <line x1="380" y1="60" x2="200" y2="160"/>
+            <line x1="380" y1="60" x2="560" y2="160"/>
+            <line x1="200" y1="160" x2="200" y2="290"/>
+            <line x1="560" y1="160" x2="560" y2="290"/>
+            <line x1="200" y1="290" x2="380" y2="400"/>
+            <line x1="560" y1="290" x2="380" y2="400"/>
+            <line x1="200" y1="160" x2="560" y2="160"/>
+            <line x1="200" y1="290" x2="560" y2="290"/>
+            <line x1="380" y1="60" x2="380" y2="400" stroke-dasharray="4"/>
+          </g>
+          <!-- nodes -->
+          <g text-anchor="middle">
+            <g><circle cx="380" cy="60" r="40" fill="rgba(108,140,255,.14)" stroke="#6c8cff"/><text x="380" y="56" font-weight="700">Marque</text><text x="380" y="72" font-size="9" fill="#9aa3b8">co-construite</text></g>
+            <g><circle cx="200" cy="160" r="42" fill="rgba(168,85,247,.14)" stroke="#a855f7"/><text x="200" y="156" font-weight="700">Noyau</text><text x="200" y="172" font-weight="700">central</text></g>
+            <g><circle cx="560" cy="160" r="42" fill="rgba(52,211,153,.14)" stroke="#34d399"/><text x="560" y="156" font-weight="700">Capital</text><text x="560" y="172" font-weight="700">marque</text></g>
+            <g><circle cx="200" cy="290" r="42" fill="rgba(245,196,81,.14)" stroke="#f5c451"/><text x="200" y="286" font-weight="700">RBV /</text><text x="200" y="302" font-weight="700">Cabaia</text></g>
+            <g><circle cx="560" cy="290" r="42" fill="rgba(251,113,133,.14)" stroke="#fb7185"/><text x="560" y="286" font-weight="700">INPI /</text><text x="560" y="302" font-weight="700">droit</text></g>
+            <g><circle cx="380" cy="400" r="44" fill="rgba(34,211,238,.14)" stroke="#22d3ee"/><text x="380" y="396" font-weight="700">EPIC·MEME</text><text x="380" y="412" font-weight="700">·PAST</text></g>
+          </g>
+          <!-- edge labels -->
+          <g font-size="9.5" fill="#6b7390" text-anchor="middle">
+            <text x="270" y="105">Abric/Moscovici</text>
+            <text x="490" y="105">Keller CBBE</text>
+            <text x="380" y="150">identité/image</text>
+            <text x="135" y="225">extensions</text>
+            <text x="625" y="225">Pfeifer →</text>
+            <text x="380" y="280">VRIN ↔ activation</text>
+            <text x="270" y="360">ressources</text>
+            <text x="490" y="360">protection</text>
+          </g>
+        </svg>
+        <div class="cap">Le cours forme un réseau, pas une liste</div>
+      </div>
+
+      <h3>Les 4 fils rouges (phrases de conclusion prêtes)</h3>
+      <ul class="clean">
+        <li><strong>Stabilité ↔ adaptation :</strong> noyau intemporel vs périphérie évolutive — Aaker → Michel → fondé par Abric/Moscovici.</li>
+        <li><strong>Marque co-construite :</strong> parties prenantes (S1) → Semprini (S2) → Moscovici/Abric (S3) → Fournier relationnel (S6).</li>
+        <li><strong>Le temps = légitimité :</strong> patrimoine (S2) → nostalgie/longévité (S7) → PAST / Pecot.</li>
+        <li><strong>Chaîne d'alignement :</strong> Ressources → Stratégie → Plateforme → Activation (RBV soutient EPIC/MEME/PAST).</li>
+      </ul>
+      <div class="card"><h4 style="margin-top:0">Ponts les plus probables à l'examen</h4>
+      <ul class="clean" style="font-size:14px">
+        <li><strong>Pfeifer</strong> = pont S4↔S5 : « prolongation des trademarks » = renouvellement INPI ; reco « déposer des logos » = arrêt Louboutin.</li>
+        <li><strong>EPIC ↔ PAST</strong> : Scholz cite Pecot ; SMART = version archétypale du « visual mix ».</li>
+        <li><strong>MEME ↔ Godefroy</strong> (influenceurs) : même socle (digital labor) ; Godefroy = la face critique.</li>
+        <li><strong>RBV ↔ les 3 leviers</strong> : un mème/visuel/passé ne vaut que s'il renforce une ressource VRIN.</li>
+      </ul></div>
+    </section>
+
+    <!-- MODULE 10 -->
+    <section id="m10" data-mod>
+      <span class="eyebrow">🎯 Module 10</span>
+      <h2 class="title">Cas pratiques (formats d'examen)</h2>
+      <p class="lead">Ce que tu auras probablement à composer demain. Mémorise la <strong>structure de réponse</strong> de chaque type.</p>
+
+      <h3>🧬 Cas type « Noyau central GO/NO GO » (le + probable)</h3>
+      <div class="card"><p style="font-size:14px"><strong>Énoncé type :</strong> « Coca-Cola lance Coca Focus (boisson énergisante). Bon ou mauvais ? »<br><strong>Plan de réponse :</strong></p>
+        <ol style="margin:0 0 0 20px;font-size:14px;color:#d2d7e6">
+          <li>Identifier le <strong>noyau central</strong> de Coca (5 assos max : plaisir, partage, américanité, rouge, recette secrète…).</li>
+          <li>Diagnostiquer : extension de gamme ou de marque ? (Focus = adjacent risqué).</li>
+          <li>Compatibilité : l'extension respecte-t-elle le noyau ? (énergie ≠ plaisir-partage → tension).</li>
+          <li><strong>Décision</strong> GO/NO GO/sous conditions + justification.</li>
+          <li>Si GO → mix de lancement (cible, bénéfice, preuve, prix, canal).</li>
+        </ol>
+      </div>
+
+      <h3>♟️ Cas type « Cabaia / RBV »</h3>
+      <div class="card"><p style="font-size:14px"><strong>4 questions types :</strong></p>
+        <ul class="clean" style="font-size:14px">
+          <li>Les ressources de Cabaia = avantage durable ? → passer chaque ressource au crible <strong>VRIN</strong> ; conclure que c'est le <em>bundle</em> qui est inimitable.</li>
+          <li>Stratégie ou activation ? → très forte en activation (viral, drops, communauté) ; risque = dépendance au buzz court terme.</li>
+          <li>« Brand as a Service » → vend une expérience + service relationnel (personnalisation, garantie à vie, co-création).</li>
+          <li>Évite le competitive convergence trap ? → oui, par différenciation identitaire (design, ton, RSE) pas par le prix.</li>
+        </ul>
+      </div>
+
+      <h3>🧠 Cas type « TAP » (persona Emma)</h3>
+      <div class="card"><p style="font-size:14px">Diagnostiquer quel déterminant bloque l'intention, puis concevoir le message :</p>
+        <ul class="clean" style="font-size:14px">
+          <li><strong>Attitude</strong> faible → montrer les bénéfices (CV, expérience).</li>
+          <li><strong>Norme</strong> contre → témoignages de pairs, « tout le monde le fait ».</li>
+          <li><strong>Contrôle perçu</strong> faible → lever les obstacles (bourses, cours d'anglais, accompagnement).</li>
+        </ul>
+      </div>
+
+      <h3>📦 Cas type « Portefeuille / LU »</h3>
+      <div class="card"><p style="font-size:14px"><strong>Pareto 80/20</strong> (10-20% des réfs = 70-80% du CA) + <strong>matrice BCG</strong> (Stars / Vaches à lait / Dilemmes / Poids morts). Risque de sur-concentration : dépendance excessive aux « héros » (ex. Prince) → vulnérabilité bad buzz. Critères mesurables d'arbitrage : marge nette (logistique incluse), rotation, cannibalisation, complexité industrielle.</p></div>
+
+      <div class="keep"><div class="h">⭐ Conseil de copie</div>Toujours : (1) définir le concept mobilisé avec son auteur, (2) l'appliquer au cas avec des éléments concrets, (3) trancher clairement, (4) conclure par un <strong>pont</strong> (fil rouge). Un correcteur adore une copie qui <em>relie</em>.</div>
+      <p style="text-align:center;margin-top:30px"><a href="#flash" class="btn prim" style="display:inline-block;text-decoration:none">→ Maintenant, entraîne-toi : Flashcards</a></p>
+    </section>
+
+    <!-- FLASHCARDS -->
+    <section id="flash" data-mod>
+      <span class="eyebrow">🃏 Entraînement</span>
+      <h2 class="title">Flashcards</h2>
+      <p class="lead">Clique la carte pour révéler la réponse. Force-toi à répondre <em>à voix haute</em> avant de retourner.</p>
+      <div class="deckpick" id="deckpick"></div>
+      <div class="fcwrap">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="fcinner">
+            <div class="fcface fcfront"><div class="fctag" id="fctag">—</div><div class="q" id="fcq">—</div><div class="hint">👆 clique pour voir la réponse</div></div>
+            <div class="fcface fcback"><div class="fctag">Réponse</div><div class="a" id="fca">—</div></div>
+          </div>
+        </div>
+        <div class="fcnav">
+          <button class="btn" onclick="prevCard(event)">← Précédent</button>
+          <span class="fccount" id="fccount">1 / 1</span>
+          <button class="btn prim" onclick="nextCard(event)">Suivant →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" data-mod>
+      <span class="eyebrow">✅ Test final</span>
+      <h2 class="title">Quiz noté</h2>
+      <p class="lead">15 questions pièges, comme à l'examen. Clique ta réponse → correction immédiate avec explication.</p>
+      <div id="quizbox"></div>
+      <div class="scorebox" id="scorebox">Score : 0 / 0 répondu — clique les réponses !</div>
+    </section>
+
+    <div style="max-width:1000px;margin:0 auto;padding:40px;text-align:center;color:var(--dim)">
+      <p style="font-size:14px">Tu as fini le sprint. 🌙 Cette nuit, revois en priorité : <strong style="color:var(--gold)">Noyau central</strong>, <strong style="color:var(--gold)">RBV/Cabaia</strong>, <strong style="color:var(--gold)">EPIC·MEME·PAST</strong>.</p>
+      <p style="font-size:13px;margin-top:10px">Besoin d'être drillé à l'oral ? Reviens dans le terminal : <strong>CERBÈRE</strong> t'attend (tape <code>/cas</code> ou <code>/simu</code>).</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- progress + nav ---------- */
+const mods = [...document.querySelectorAll('[data-mod]')];
+const navlinks = [...document.querySelectorAll('#nav a, .side nav a')];
+const STORE='sprintMarqueProgress';
+let done = JSON.parse(localStorage.getItem(STORE)||'{}');
+const crumb=document.getElementById('crumb'), markbtn=document.getElementById('markbtn');
+let current='sprint';
+
+function labelFor(id){const a=navlinks.find(x=>x.dataset.s===id);return a?a.textContent.replace('●','').trim():id;}
+function refreshProgress(){
+  const total=10;const n=Object.keys(done).filter(k=>k.startsWith('m')&&done[k]).length;
+  document.getElementById('pf').style.width=(n/total*100)+'%';
+  document.getElementById('pt').textContent=n+' / '+total+' modules';
+  navlinks.forEach(a=>{a.classList.toggle('done',!!done[a.dataset.s]);});
+}
+function setCurrent(id){
+  current=id;
+  navlinks.forEach(a=>a.classList.toggle('on',a.dataset.s===id));
+  const a=navlinks.find(x=>x.dataset.s===id);
+  if(a) crumb.textContent=a.textContent.trim();
+  const isMarkable=/^m\d+$/.test(id);
+  markbtn.style.display=isMarkable?'block':'none';
+  if(isMarkable){markbtn.classList.toggle('done',!!done[id]);markbtn.textContent=done[id]?'✓ Module lu':'○ Marquer comme lu';}
+}
+markbtn.onclick=()=>{done[current]=!done[current];localStorage.setItem(STORE,JSON.stringify(done));refreshProgress();setCurrent(current);};
+
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>0.3){setCurrent(e.target.id);}});
+},{threshold:[0.3],rootMargin:'-10% 0px -50% 0px'});
+mods.forEach(m=>io.observe(m));
+refreshProgress();setCurrent('sprint');
+
+/* ---------- noyau interactive ---------- */
+function showNoyau(t){
+  const el=document.getElementById('noyauInfo');
+  if(t==='noy'){el.innerHTML="<strong style='color:#6c8cff'>🔵 Noyau central</strong> — stable, consensuel, génère le sens. <strong>Fonctions : génératrice (donne du sens à tout le reste) + organisatrice (structure la représentation).</strong> Y toucher = dénaturer la marque = zone ROUGE. C'est l'« ADN non négociable ».";}
+  else{el.innerHTML="<strong style='color:#fb7185'>🔴 Système périphérique</strong> — flexible, contextuel, concret. <strong>Fonctions : protection (absorbe les contradictions pour protéger le noyau) + adaptation (permet d'évoluer sans mourir).</strong> Zone VERTE = modifiable (logo, goûts, formats, canaux).";}
+}
+
+/* ---------- flashcards ---------- */
+const decks={
+  "Définitions ★":[
+    ["Définis la représentation sociale","Moscovici (1961) : « une forme de connaissance socialement élaborée et partagée, ayant une visée pratique et concourant à la construction d'une réalité commune à un ensemble social. »"],
+    ["Définis le CBBE","Keller (1993) : « l'effet différentiel de la connaissance de la marque sur la réponse du consommateur aux actions marketing. »"],
+    ["Théorie du noyau central : les 2 systèmes ?","Abric — Noyau central (stable, non négociable, fonctions génératrice + organisatrice) / Système périphérique (flexible, fonctions protection + adaptation)."],
+    ["Le modèle TPB/TAP d'Ajzen ?","Attitude + Norme subjective + Contrôle comportemental perçu → INTENTION → Comportement. (Le TPB ajoute le contrôle perçu à la TRA.)"],
+    ["Le test VRIN (Barney) ?","Valuable, Rare, Inimitable, Non-substituable. Une ressource = avantage durable si elle coche les 4. VRIO = + Organisé."],
+    ["Identifiant vs marque : les 2 règles ?","Règle des 25 ans (3 générations) + règle des 5 associations précises et différenciantes. ¾ des « marques » FMCG ne sont que des identifiants."]
+  ],
+  "Frameworks":[
+    ["Les 6 facettes du prisme de Kapferer ?","Physique, Personnalité, Relation, Culture, Reflet, Mentalisation. Haut = émetteur, bas = destinataire."],
+    ["Les 4 perspectives d'Aaker ?","Marque comme Produit / Organisation / Personne / Symbole."],
+    ["Les 4 composants du CBBE ?","Notoriété → Image → Qualité perçue → Fidélité (pyramide, de la base au sommet)."],
+    ["Les 4 métaphores de Holt ?","Empreinte mentale, Partenaire, Virale, Icône culturelle (= performe un mythe résolvant une contradiction anthropologique)."],
+    ["Les 3 niveaux sémiotiques (Heilbrunn) ?","Figuratif (esthétique) → Narratif (Contrat-Compétences-Performances-Sanctions) → Axiologique (éthique/valeurs)."],
+    ["Les 6 dimensions du BRQ (Fournier) ?","Amour/Passion, Connexion au soi, Interdépendance, Engagement, Intimité, Qualité du partenaire."],
+    ["La chaîne d'alignement (S7a) ?","Ressources → Stratégie → Plateforme → Activation."]
+  ],
+  "EPIC·MEME·PAST":[
+    ["Que veut dire EPIC ?","Essence → Personify (archétypes) → Inflect (thèmes) → Catalogue (via SMART). Scholz 2025."],
+    ["Que veut dire SMART (Scholz) ?","Symbols, Movements, Areas, Relations (couleur/ligne/forme/cadrage), Tone. ⚠️ PAS le SMART de gestion de projet."],
+    ["Les 3 propriétés du mème de marque (Marty) ?","① Populaire & fédérateur (newsjacking) ② Poreux, jouable & viral (digital labor) ③ Branding dépublicitarisé (contrôle du décontrôle)."],
+    ["Concept-clé de PAST (Pecot) ?","Le « visual mix » : sélection / dosage / articulation des codes du temps (dérivé du marketing mix de Borden). Trop = « fall into farce »."],
+    ["Les 4 thèmes de longévité (Pecot) ?","Legitimizing (56% - continuité=compétence), Humorous (41%), Nostalgic (24% - refuge), Aesthetic (28%)."],
+    ["Lequel d'EPIC/MEME/PAST est un acronyme ?","Seulement EPIC (+ son sous-acronyme SMART). MEME = le mot mème. PAST = thématique du passé/longévité."]
+  ],
+  "Pièges ⚠️":[
+    ["Pfeifer : RS et ED, quel effet ?","RS (Relevant Stature = notoriété) → POSITIF (protège). ED (Energized Differentiation) → NÉGATIF (piège de la niche). Contre-intuitif !"],
+    ["Identité vs Image ?","Identité = émetteur (ce que la marque veut être). Image = récepteur (ce qui est perçu). Ne jamais confondre."],
+    ["Extension de gamme vs de marque ?","Gamme = même marché (nouvelle variante). Marque = nouveau marché (autre catégorie)."],
+    ["Stratégie vs Activation ?","Stratégie = cohérence + différenciation (le fond). Activation = expression + visibilité (la forme)."],
+    ["Moscovici ou Abric : qui fait quoi ?","Moscovici = représentation sociale (1961). Abric = théorie du noyau central. Ne pas inverser."],
+    ["L'arrêt Louboutin établit quoi ?","La semelle rouge = marque de POSITION (couleur + emplacement), pas une « forme ». Donc valide."],
+    ["L'INPI garantit-il l'absence de conflit ?","NON. Il enregistre mais ne surveille pas le marché. C'est au titulaire de surveiller et poursuivre."]
+  ]
+};
+let curDeck=Object.keys(decks)[0], curIdx=0;
+const dp=document.getElementById('deckpick');
+Object.keys(decks).forEach(name=>{
+  const b=document.createElement('div');b.className='dk'+(name===curDeck?' on':'');b.textContent=name;
+  b.onclick=()=>{curDeck=name;curIdx=0;[...dp.children].forEach(c=>c.classList.toggle('on',c.textContent===name));renderCard();};
+  dp.appendChild(b);
+});
+function renderCard(){
+  const card=decks[curDeck][curIdx];
+  document.getElementById('flashcard').classList.remove('flip');
+  setTimeout(()=>{
+    document.getElementById('fctag').textContent=curDeck;
+    document.getElementById('fcq').textContent=card[0];
+    document.getElementById('fca').textContent=card[1];
+    document.getElementById('fccount').textContent=(curIdx+1)+' / '+decks[curDeck].length;
+  },120);
+}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flip');}
+function nextCard(e){e.stopPropagation();curIdx=(curIdx+1)%decks[curDeck].length;renderCard();}
+function prevCard(e){e.stopPropagation();curIdx=(curIdx-1+decks[curDeck].length)%decks[curDeck].length;renderCard();}
+renderCard();
+
+/* ---------- quiz ---------- */
+const quiz=[
+ {q:"Quel auteur a formulé la théorie du noyau central ?",o:["Moscovici","Abric","Keller","Kapferer"],c:1,e:"Abric organise la représentation sociale (définie par Moscovici) en noyau + périphérie."},
+ {q:"Une « extension de marque », c'est…",o:["Une nouvelle variante dans la même catégorie","Un nouveau produit dans une AUTRE catégorie","Une nouvelle couleur de logo","Une baisse de prix"],c:1,e:"Extension de marque = nouveau marché. Extension de gamme = même marché."},
+ {q:"Dans le paper Pfeifer, la différenciation (ED) a quel effet sur la prolongation d'une marque ?",o:["Positif","Négatif","Aucun","Variable selon le pays uniquement"],c:1,e:"Effet NÉGATIF : trop différencié = niche fragile (piège de Porter). Contre-intuitif, classique à l'examen."},
+ {q:"Le prisme de Kapferer compte combien de facettes ?",o:["4","5","6","12"],c:2,e:"6 facettes : Physique, Personnalité, Relation, Culture, Reflet, Mentalisation."},
+ {q:"Que signifie le 'S' de l'instrument SMART (Scholz) ?",o:["Spécifique","Symbols","Stratégie","Social"],c:1,e:"SMART = Symbols, Movements, Areas, Relations, Tone. PAS le SMART de gestion de projet !"},
+ {q:"Le CBBE est défini par…",o:["Aaker","Keller","Holt","Belk"],c:1,e:"Keller (1993) : l'effet différentiel de la connaissance de la marque sur la réponse du consommateur."},
+ {q:"Dans la TPB d'Ajzen, qu'est-ce qui mène directement au comportement ?",o:["L'attitude","La norme subjective","L'intention","Le contrôle perçu"],c:2,e:"Attitude + Norme + Contrôle → INTENTION → Comportement. L'intention est l'antécédent direct."},
+ {q:"VRIN signifie…",o:["Valuable, Rare, Inimitable, Non-substituable","Visible, Réel, Innovant, Nouveau","Valeur, Risque, Innovation, Notoriété","Vente, Revenu, Investissement, Niche"],c:0,e:"Barney 1991. VRIO = VRIN + Organisé pour capter la valeur."},
+ {q:"L'arrêt Louboutin a qualifié la semelle rouge de…",o:["Marque verbale","Forme protégée","Marque de position","Marque sonore"],c:2,e:"Marque de position = couleur + emplacement. Donc pas une simple 'forme'."},
+ {q:"Lequel de ces trois leviers N'EST PAS un acronyme ?",o:["EPIC","SMART","MEME","Aucun, les trois sont des acronymes"],c:2,e:"MEME = le mot 'mème'. PAST aussi n'est pas un acronyme. Seul EPIC (et SMART) le sont."},
+ {q:"Le 'visual mix' (Pecot) est dérivé de quel concept ?",o:["Le marketing mix de Borden","Le prisme de Kapferer","La pyramide de Maslow","Les 4P de Kotler uniquement"],c:0,e:"Visual mix = sélection/dosage/articulation des codes, calqué sur le marketing mix de Borden (1964)."},
+ {q:"Identité et image, c'est…",o:["La même chose","Identité = perçue, Image = émise","Identité = émise, Image = perçue","Deux mots pour le logo"],c:2,e:"Identité = côté émetteur (marque). Image = côté récepteur (consommateur)."},
+ {q:"Cabaia est un exemple de…",o:["Marque de luxe centenaire","DNVB (Digitally Native Vertical Brand)","Marque de distributeur","Franchise américaine"],c:1,e:"DNVB française, née sur le web, verticale. Sa force VRIN = le bundle communauté+design+valeurs."},
+ {q:"Le branding « dé-brandé » (Marty) consiste à…",o:["Supprimer le logo définitivement","Faire du branding sans avoir l'air de faire de la pub","Vendre sans marque","Copier les concurrents"],c:1,e:"Dépublicitarisation : esthétique brute, mème, on capte sans matraquer publicitairement."},
+ {q:"Dans la pyramide CBBE, quelle est la BASE ?",o:["La fidélité","La qualité perçue","La notoriété","L'image"],c:2,e:"Notoriété → Image → Qualité perçue → Fidélité. Sans notoriété, pas de capital-marque possible."}
+];
+let answered=0,score=0;
+const qb=document.getElementById('quizbox');
+quiz.forEach((item,i)=>{
+  const card=document.createElement('div');card.className='q-card';
+  card.innerHTML=`<div class="q-num">Question ${i+1} / ${quiz.length}</div><div class="q-txt">${item.q}</div>`;
+  item.o.forEach((opt,j)=>{
+    const o=document.createElement('div');o.className='opt';o.textContent=opt;
+    o.onclick=()=>{
+      if(card.dataset.done)return;card.dataset.done=1;
+      [...card.querySelectorAll('.opt')].forEach(x=>x.classList.add('disabled'));
+      if(j===item.c){o.classList.add('correct');score++;}
+      else{o.classList.add('wrong');card.querySelectorAll('.opt')[item.c].classList.add('correct');}
+      answered++;
+      const ex=card.querySelector('.explain');ex.classList.add('show');
+      updateScore();
+    };
+    card.appendChild(o);
+  });
+  const ex=document.createElement('div');ex.className='explain';ex.innerHTML='💡 '+item.e;card.appendChild(ex);
+  qb.appendChild(card);
+});
+function updateScore(){
+  const sb=document.getElementById('scorebox');
+  sb.textContent=`Score : ${score} / ${answered} répondu`+(answered===quiz.length?` — TERMINÉ ! ${score>=12?'🔥 Tu es prêt.':score>=8?'👍 Solide, révise les ratés.':'📚 Reprends les modules en rouge.'}`:'');
+}
+</script>
+</body>
+</html>
