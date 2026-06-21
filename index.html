@@ -127,6 +127,18 @@
   details.recall summary::-webkit-details-marker{display:none}
   details.recall summary:before{content:"🧠 Teste-toi (révéler) ";font-weight:600}
   details.recall[open] summary:before{content:"🧠 Réponse :";color:var(--dim)}
+  /* atelier coche & juge */
+  .ngame-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .ngame-asso{flex:1;min-width:150px;font-size:14px;font-weight:700;color:var(--txt)}
+  .ntoggle{display:flex;gap:6px}
+  .nbtn{font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:8px;border:1px solid var(--line);background:var(--card2);cursor:pointer;color:var(--txt);transition:.12s}
+  .nbtn:hover{border-color:var(--acc)}
+  .nbtn.sel{border-color:var(--acc);background:rgba(59,91,219,.12)}
+  .nbtn.ok{border-color:var(--green);background:rgba(52,211,153,.18);color:#0a7d52}
+  .nbtn.ko{border-color:var(--red);background:rgba(251,113,133,.16);color:#b91c3c}
+  .ngame-fb{font-size:12.5px;color:var(--mut);width:100%;padding-left:2px;display:none}
+  .ngame-fb.show{display:block}
+  .quizfield-h{font-size:13px;font-weight:800;color:var(--acc);margin:18px 0 4px;text-transform:uppercase;letter-spacing:.5px}
   .qreflect{border-left:3px solid var(--acc2);background:rgba(124,58,237,.05);border-radius:0 12px 12px 0;padding:13px 16px;margin:12px 0}
   .qr{font-weight:700;font-size:14.5px;color:var(--txt);margin:0 0 2px}
   .qr .qhint{display:block;font-weight:500;font-size:12.5px;color:var(--mut);margin-top:3px}
@@ -239,7 +251,7 @@
     <nav>
       <a href="#memo" data-s="memo"><span class="ico">🧠</span>Mémo &amp; mnémo<span class="dot"></span></a>
       <a href="#flash" data-s="flash"><span class="ico">🃏</span>Flashcards<span class="dot"></span></a>
-      <a href="#quiz" data-s="quiz"><span class="ico">✅</span>Quiz noté<span class="dot"></span></a>
+      <a href="#quiz" data-s="quiz"><span class="ico">✅</span>QCM appliqués<span class="dot"></span></a>
     </nav>
     <div style="padding:18px 12px;font-size:11px;color:var(--dim);line-height:1.5">Ta progression est sauvegardée automatiquement dans ce navigateur.</div>
   </aside>
@@ -1184,11 +1196,22 @@
 
     <!-- QUIZ -->
     <section id="quiz" data-mod>
-      <span class="eyebrow">✅ Test final</span>
-      <h2 class="title">Quiz noté</h2>
-      <p class="lead">15 questions pièges, comme à l'examen. Clique ta réponse → correction immédiate avec explication.</p>
+      <span class="eyebrow">✅ S'auto-évaluer en APPLIQUANT</span>
+      <h2 class="title">QCM appliqués — un par chapitre</h2>
+      <p class="lead">Fini le par-cœur. Ici tu <strong>qualifies, tu juges, tu décides</strong> — comme à l'examen. Commence par l'atelier interactif, puis teste chaque chapitre.</p>
+
+      <div class="casehead">🧬 Atelier interactif — Noyau central : « coche &amp; juge » <span class="tagp b-red">le + probable</span></div>
+      <div class="casewrap">
+        <p style="font-size:14px"><strong>Marque :</strong> Nutella. <strong>Étape 1 —</strong> pour chaque association, décide : fait-elle partie du <strong style="color:var(--acc)">Noyau</strong> (non négociable, la marque n'a plus de sens sans elle) ou de la <strong style="color:var(--red)">Périphérie</strong> (modifiable sans trahir la marque) ?</p>
+        <div id="noyauGame"></div>
+        <button class="btn prim" id="noyauCheck" style="margin-top:14px">Vérifier mon classement</button>
+        <div id="noyauStep2" style="margin-top:16px"></div>
+      </div>
+
+      <div class="quizfield-h">📚 Puis : choisis un chapitre à tester</div>
+      <div class="deckpick" id="quizpick"></div>
       <div id="quizbox"></div>
-      <div class="scorebox" id="scorebox">Score : 0 / 0 répondu — clique les réponses !</div>
+      <div class="scorebox" id="scorebox">👆 Choisis un chapitre ci-dessus pour démarrer le QCM appliqué.</div>
     </section>
 
     <div style="max-width:1000px;margin:0 auto;padding:40px;text-align:center;color:var(--dim)">
@@ -1297,48 +1320,116 @@ function nextCard(e){e.stopPropagation();curIdx=(curIdx+1)%decks[curDeck].length
 function prevCard(e){e.stopPropagation();curIdx=(curIdx-1+decks[curDeck].length)%decks[curDeck].length;renderCard();}
 renderCard();
 
-/* ---------- quiz ---------- */
-const quiz=[
- {q:"Quel auteur a formulé la théorie du noyau central ?",o:["Moscovici","Abric","Keller","Kapferer"],c:1,e:"Abric organise la représentation sociale (définie par Moscovici) en noyau + périphérie."},
- {q:"Une « extension de marque », c'est…",o:["Une nouvelle variante dans la même catégorie","Un nouveau produit dans une AUTRE catégorie","Une nouvelle couleur de logo","Une baisse de prix"],c:1,e:"Extension de marque = nouveau marché. Extension de gamme = même marché."},
- {q:"Dans le paper Pfeifer, la différenciation (ED) a quel effet sur la prolongation d'une marque ?",o:["Positif","Négatif","Aucun","Variable selon le pays uniquement"],c:1,e:"Effet NÉGATIF : trop différencié = niche fragile (piège de Porter). Contre-intuitif, classique à l'examen."},
- {q:"Le prisme de Kapferer compte combien de facettes ?",o:["4","5","6","12"],c:2,e:"6 facettes : Physique, Personnalité, Relation, Culture, Reflet, Mentalisation."},
- {q:"Que signifie le 'S' de l'instrument SMART (Scholz) ?",o:["Spécifique","Symbols","Stratégie","Social"],c:1,e:"SMART = Symbols, Movements, Areas, Relations, Tone. PAS le SMART de gestion de projet !"},
- {q:"Le CBBE est défini par…",o:["Aaker","Keller","Holt","Belk"],c:1,e:"Keller (1993) : l'effet différentiel de la connaissance de la marque sur la réponse du consommateur."},
- {q:"Dans la TPB d'Ajzen, qu'est-ce qui mène directement au comportement ?",o:["L'attitude","La norme subjective","L'intention","Le contrôle perçu"],c:2,e:"Attitude + Norme + Contrôle → INTENTION → Comportement. L'intention est l'antécédent direct."},
- {q:"VRIN signifie…",o:["Valuable, Rare, Inimitable, Non-substituable","Visible, Réel, Innovant, Nouveau","Valeur, Risque, Innovation, Notoriété","Vente, Revenu, Investissement, Niche"],c:0,e:"Barney 1991. VRIO = VRIN + Organisé pour capter la valeur."},
- {q:"L'arrêt Louboutin a qualifié la semelle rouge de…",o:["Marque verbale","Forme protégée","Marque de position","Marque sonore"],c:2,e:"Marque de position = couleur + emplacement. Donc pas une simple 'forme'."},
- {q:"Lequel de ces trois leviers N'EST PAS un acronyme ?",o:["EPIC","SMART","MEME","Aucun, les trois sont des acronymes"],c:2,e:"MEME = le mot 'mème'. PAST aussi n'est pas un acronyme. Seul EPIC (et SMART) le sont."},
- {q:"Le 'visual mix' (Pecot) est dérivé de quel concept ?",o:["Le marketing mix de Borden","Le prisme de Kapferer","La pyramide de Maslow","Les 4P de Kotler uniquement"],c:0,e:"Visual mix = sélection/dosage/articulation des codes, calqué sur le marketing mix de Borden (1964)."},
- {q:"Identité et image, c'est…",o:["La même chose","Identité = perçue, Image = émise","Identité = émise, Image = perçue","Deux mots pour le logo"],c:2,e:"Identité = côté émetteur (marque). Image = côté récepteur (consommateur)."},
- {q:"Cabaia est un exemple de…",o:["Marque de luxe centenaire","DNVB (Digitally Native Vertical Brand)","Marque de distributeur","Franchise américaine"],c:1,e:"DNVB française, née sur le web, verticale. Sa force VRIN = le bundle communauté+design+valeurs."},
- {q:"Le branding « dé-brandé » (Marty) consiste à…",o:["Supprimer le logo définitivement","Faire du branding sans avoir l'air de faire de la pub","Vendre sans marque","Copier les concurrents"],c:1,e:"Dépublicitarisation : esthétique brute, mème, on capte sans matraquer publicitairement."},
- {q:"Dans la pyramide CBBE, quelle est la BASE ?",o:["La fidélité","La qualité perçue","La notoriété","L'image"],c:2,e:"Notoriété → Image → Qualité perçue → Fidélité. Sans notoriété, pas de capital-marque possible."}
+/* ---------- atelier interactif : coche & juge (noyau central) ---------- */
+const noyauData=[
+  {a:"Goût chocolat-noisette",noyau:true,fb:"NOYAU : enlève ce goût → ce n'est plus Nutella. Intensité 9, unicité 8."},
+  {a:"Plaisir / gourmandise",noyau:true,fb:"NOYAU : l'émotion au cœur de la marque, stable et non négociable."},
+  {a:"Petit-déjeuner en famille",noyau:true,fb:"NOYAU : association symbolique forte, durable, structurante du sens."},
+  {a:"Le pot en verre iconique",noyau:false,fb:"PÉRIPHÉRIE : reconnaissable, mais on pourrait le changer sans tuer la marque."},
+  {a:"La pub TV du moment",noyau:false,fb:"PÉRIPHÉRIE : contextuel, change en permanence (zone verte)."},
+  {a:"Le format 750 g",noyau:false,fb:"PÉRIPHÉRIE : variable selon les pays / promos. Adaptable."}
 ];
-let answered=0,score=0;
-const qb=document.getElementById('quizbox');
-quiz.forEach((item,i)=>{
+const ng=document.getElementById('noyauGame');
+noyauData.forEach((d,i)=>{
+  const row=document.createElement('div');row.className='ngame-row';
+  row.innerHTML=`<div class="ngame-asso">${d.a}</div>
+    <div class="ntoggle"><button class="nbtn" data-v="1">🔵 Noyau</button><button class="nbtn" data-v="0">🔴 Périphérie</button></div>
+    <div class="ngame-fb">${d.fb}</div>`;
+  row.querySelectorAll('.nbtn').forEach(b=>{
+    b.onclick=()=>{if(ng.dataset.done)return;row.querySelectorAll('.nbtn').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');row.dataset.pick=b.dataset.v;};
+  });
+  ng.appendChild(row);
+});
+document.getElementById('noyauCheck').onclick=()=>{
+  if(ng.dataset.done)return;ng.dataset.done=1;let good=0;
+  [...ng.children].forEach((row,i)=>{
+    const pick=row.dataset.pick, truth=noyauData[i].noyau?"1":"0";
+    const btns=row.querySelectorAll('.nbtn');
+    const correctBtn=noyauData[i].noyau?btns[0]:btns[1];correctBtn.classList.add('ok');
+    if(pick===truth)good++; else if(pick!==undefined){(pick==="1"?btns[0]:btns[1]).classList.add('ko');}
+    row.querySelector('.ngame-fb').classList.add('show');
+  });
+  const s2=document.getElementById('noyauStep2');
+  s2.innerHTML=`<div class="ex"><div class="h">✅ ${good}/6 bien classés</div>Le noyau de Nutella = <strong>goût choco-noisette + plaisir gourmand + moment familial</strong>. Le reste est périphérie.</div>
+  <p style="font-size:14px;font-weight:700;margin:14px 0 6px">Étape 2 — Décision. Nutella veut lancer « <strong>Nutella Apéro</strong> » (une pâte à tartiner <em>salée</em> pour l'apéritif). GO ou NO GO ?</p>
+  <div id="gonogoBox"></div>`;
+  const gq={q:"Ton verdict argumenté :",o:["GO : c'est juste une nouvelle variante (extension de gamme)","NO GO en direct : le salé contredit le noyau plaisir-sucré (zone rouge) → risque de dénaturation","GO : ça ne touche que la périphérie, aucun risque"],c:1,e:"Le noyau de Nutella est le PLAISIR SUCRÉ-GOURMAND. Une pâte salée attaque ce noyau (zone rouge) → on dénature la marque. Solution : passer par une marque distincte endossée, pas par Nutella en direct."};
+  renderMCQ(document.getElementById('gonogoBox'),gq,()=>{});
+};
+
+/* ---------- QCM appliqués, un par chapitre ---------- */
+function renderMCQ(container,item,onAns){
   const card=document.createElement('div');card.className='q-card';
-  card.innerHTML=`<div class="q-num">Question ${i+1} / ${quiz.length}</div><div class="q-txt">${item.q}</div>`;
+  card.innerHTML=`<div class="q-txt">${item.q}</div>`;
   item.o.forEach((opt,j)=>{
     const o=document.createElement('div');o.className='opt';o.textContent=opt;
     o.onclick=()=>{
       if(card.dataset.done)return;card.dataset.done=1;
       [...card.querySelectorAll('.opt')].forEach(x=>x.classList.add('disabled'));
-      if(j===item.c){o.classList.add('correct');score++;}
-      else{o.classList.add('wrong');card.querySelectorAll('.opt')[item.c].classList.add('correct');}
-      answered++;
-      const ex=card.querySelector('.explain');ex.classList.add('show');
-      updateScore();
+      const ok=(j===item.c);
+      if(ok){o.classList.add('correct');}else{o.classList.add('wrong');card.querySelectorAll('.opt')[item.c].classList.add('correct');}
+      card.querySelector('.explain').classList.add('show');
+      onAns(ok);
     };
     card.appendChild(o);
   });
   const ex=document.createElement('div');ex.className='explain';ex.innerHTML='💡 '+item.e;card.appendChild(ex);
-  qb.appendChild(card);
+  container.appendChild(card);
+}
+const quizFields={
+ "🧬 Noyau & extensions":[
+  {q:"Coca-Cola modernise son logo SANS toucher à ses valeurs. C'est…",o:["Toucher au noyau (zone rouge)","Une adaptation périphérique (zone verte)","Une extension de marque","Un changement d'identité"],c:1,e:"Le logo est périphérique TANT QU'il ne contredit pas les valeurs (le noyau). Modernisation = OK."},
+  {q:"Le parfum Bic a échoué. La meilleure explication ?",o:["Mauvaise distribution","Le noyau « jetable / pas cher » est incompatible avec l'intime et le luxe","Prix trop élevé","Pas assez de pub"],c:1,e:"On a demandé au noyau de Bic une promesse qu'il ne peut pas porter → rejet. Même mécanique que Colgate surgelés."},
+  {q:"Yamaha fabrique des motos ET des pianos. C'est une extension…",o:["de gamme (même marché)","de marque (nouveau marché)","de logo","de prix"],c:1,e:"Nouveau marché (musique ≠ moto) → extension de MARQUE. Gamme = même marché."}
+ ],
+ "🎭 Identité & image":[
+  {q:"« Le client-type de Nike = un sportif ambitieux ». Quelle facette du prisme de Kapferer ?",o:["Physique","Le Reflet (image du conso-type)","La Culture","Le Physique"],c:1,e:"Le Reflet = l'image extérieure du consommateur-type. (Pôle bas, côté destinataire.)"},
+  {q:"VW Dieselgate : « fiabilité voulue » ≠ « tricheur perçu ». Ça illustre…",o:["Que identité = image","L'écart identité (émise) / image (perçue)","Le noyau central","Le capital-marque"],c:1,e:"Identité = ce que la marque émet ; image = ce que le public perçoit. Le scandale a creusé l'écart."},
+  {q:"Cristaline = « de l'eau pas chère », point. C'est plutôt…",o:["une marque forte","un simple identifiant (pas d'imaginaire riche)","une icône culturelle","une marque de luxe"],c:1,e:"Règle des 5 associations : si on ne peut pas citer 5 associations différenciantes → identifiant, pas marque. (vs Evian)"}
+ ],
+ "💎 Capital marque":[
+  {q:"À l'aveugle on préfère Pepsi ; en marque on choisit Coca. Quel concept ?",o:["La qualité objective","Le capital-marque (CBBE) : la marque modifie la réponse","Le noyau central","Le prisme de Kapferer"],c:1,e:"CBBE (Keller) = l'effet de la marque sur la réponse du consommateur, à produit égal."},
+  {q:"Une marque ultra-différenciée sur une micro-niche (forte ED). Selon Pfeifer, sa prolongation est…",o:["plus probable","moins probable (niche fragile, piège de Porter)","garantie","sans lien"],c:1,e:"ED = effet NÉGATIF sur la survie. Contre-intuitif : trop se différencier fragilise. RS, elle, protège."},
+  {q:"Apple vend plus cher un produit techniquement comparable. Qu'est-ce qui le permet ?",o:["La notoriété seule","La qualité perçue + la fidélité (haut du CBBE)","Rien de spécial","Un prix au hasard"],c:1,e:"La qualité PERÇUE (≠ objective) + la fidélité justifient le premium. C'est le sommet de la pyramide."}
+ ],
+ "⚖️ Droit / INPI":[
+  {q:"Une boulangerie veut déposer « LE BON PAIN » pour son pain. Verdict ?",o:["Valide, c'est original","Refusé : descriptif/laudatif → non distinctif","Valide si logo","Refusé : déjà pris"],c:1,e:"Un terme qui décrit/vante le produit n'est pas distinctif → non protégeable. Pilier n°1 (Distinctive)."},
+  {q:"« Apple » pour des ordinateurs : pourquoi c'est protégeable ?",o:["C'est un fruit connu","Arbitraire : aucun lien avec le produit → fort","C'est court","C'est en anglais"],c:1,e:"Plus le mot est éloigné du produit, plus il est distinctif. « Pomme » pour un primeur serait refusé."},
+  {q:"La semelle rouge Louboutin est protégée comme…",o:["une forme","une marque de position (couleur + emplacement)","un brevet","un simple logo"],c:1,e:"CJUE 2018 : ce n'est pas une « forme » mais une marque de POSITION → valide."}
+ ],
+ "🧠 Consommateur":[
+  {q:"Booking : « Plus que 1 chambre à ce prix ! ». Quel ressort psychologique ?",o:["Preuve sociale","Aversion à la perte / rareté (FOMO)","Ancrage","Réciprocité"],c:1,e:"La peur de PERDRE l'offre fait plus agir que l'envie de gagner (Kahneman). Système 1."},
+  {q:"Emma VEUT partir en échange (attitude +) mais ses parents sont contre. On travaille en priorité…",o:["l'attitude (déjà acquise)","la norme subjective (l'entourage)","le contrôle perçu","rien"],c:1,e:"Inutile de re-vendre les bénéfices (attitude OK). Le frein = la NORME → témoignages, rassurer les parents."},
+  {q:"« 90% sans matière grasse » se vend mieux que « 10% de gras ». Quel biais ?",o:["Ancrage","Effet de cadrage (framing)","Halo","Dotation"],c:1,e:"Même info, présentation différente → décision différente. Le cadre compte plus que le contenu."}
+ ],
+ "♟️ RBV / Stratégie":[
+  {q:"Cabaia : qu'est-ce qui est VRAIMENT inimitable ?",o:["Son logo coloré","Le bundle (communauté + design + valeurs + verticalité)","Son site web","Ses prix"],c:1,e:"Chaque ressource isolée est copiable. C'est l'ASSEMBLAGE socialement complexe qui est inimitable (VRIN)."},
+  {q:"Une usine moderne : Valuable, mais tout concurrent peut en bâtir une. Avantage durable ?",o:["Oui","Non : elle n'est ni Rare ni Inimitable","Oui si grande","Oui si chère"],c:1,e:"Il faut les 4 lettres de VRIN. Manque Rare + Inimitable → pas d'avantage durable."},
+  {q:"Cabaia carbure aux drops viraux et à la communauté. Elle est surtout forte en…",o:["stratégie de fond","activation (expression / visibilité)","propriété intellectuelle","analyse financière"],c:1,e:"Activation = la forme, la visibilité. Force réelle mais risque = dépendance au buzz court terme."}
+ ],
+ "🚀 EPIC / MEME / PAST":[
+  {q:"Heinz « 150 years of clean plates ». Quel thème de longévité (Pecot) ?",o:["Nostalgic","Legitimizing (ancienneté = compétence)","Humorous","Aesthetic"],c:1,e:"Mettre en avant l'ancienneté pour prouver sa compétence/légitimité = Legitimizing (le + fréquent, 56%)."},
+  {q:"Une marque poste des mèmes drôles sur l'actu, sans avoir l'air de faire de pub. Concept (Marty) ?",o:["Newsjacking uniquement","Branding dé-brandé / dépublicitarisé","Greenwashing","Storytelling classique"],c:1,e:"Faire du branding SANS le ton publicitaire = « dé-brandé » / dépublicitarisation. Le mème en est l'outil."},
+  {q:"EPIC : traduire l'essence en un personnage universel (héros, sage, rebelle…). Quelle étape ?",o:["Essence","Personify (l'archétype)","Inflect","Catalogue"],c:1,e:"P = Personify = incarner l'essence dans un archétype (Mark & Pearson). Puis Inflect, puis Catalogue (SMART)."}
+ ]
+};
+const qpick=document.getElementById('quizpick'), qbox=document.getElementById('quizbox'), sbox=document.getElementById('scorebox');
+let fScore=0,fAns=0,fTotal=0;
+Object.keys(quizFields).forEach((name,idx)=>{
+  const b=document.createElement('div');b.className='dk';b.textContent=name;
+  b.onclick=()=>{[...qpick.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');loadField(name);};
+  qpick.appendChild(b);
 });
-function updateScore(){
-  const sb=document.getElementById('scorebox');
-  sb.textContent=`Score : ${score} / ${answered} répondu`+(answered===quiz.length?` — TERMINÉ ! ${score>=12?'🔥 Tu es prêt.':score>=8?'👍 Solide, révise les ratés.':'📚 Reprends les modules en rouge.'}`:'');
+function loadField(name){
+  qbox.innerHTML='';fScore=0;fAns=0;fTotal=quizFields[name].length;
+  quizFields[name].forEach(q=>renderMCQ(qbox,q,(ok)=>{if(ok)fScore++;fAns++;updateScore(name);}));
+  updateScore(name);
+}
+function updateScore(name){
+  if(fAns===0){sbox.textContent=`Chapitre « ${name} » — ${fTotal} questions appliquées. Réponds !`;return;}
+  let msg=`${name} — Score : ${fScore} / ${fAns}`;
+  if(fAns===fTotal)msg+=fScore===fTotal?" — 🔥 parfait, chapitre maîtrisé !":fScore>=fTotal-1?" — 👍 presque, revois le raté.":" — 📚 relis ce chapitre.";
+  sbox.textContent=msg;
 }
 </script>
 </body>
