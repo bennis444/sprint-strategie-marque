@@ -13,7 +13,7 @@
     --r:16px; --shadow:0 8px 28px rgba(30,30,60,.10);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;scroll-padding-top:20px}
+  html{scroll-behavior:smooth;scroll-padding-top:78px}
   body{background:var(--bg);color:var(--txt);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
   a{color:var(--acc);text-decoration:none}
   ::selection{background:var(--acc);color:#fff}
@@ -91,6 +91,28 @@
   .lg-green{border-color:rgba(52,211,153,.4)} .lg-green .lg-dot{background:var(--green);box-shadow:0 0 10px var(--green)}
   .lg-cyan{border-color:rgba(34,211,238,.4)} .lg-cyan .lg-dot{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
   .legend-foot{font-size:13px;color:var(--mut);margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+  /* cas pratiques — boutons concepts */
+  .jumprow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 2px}
+  .jumplabel{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--acc);width:100%;margin-bottom:1px;display:flex;align-items:center;gap:6px}
+  .jump{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 13px;border-radius:10px;background:var(--card2);border:1px solid var(--line);color:var(--txt);text-decoration:none;transition:.15s;line-height:1.2}
+  .jump:before{content:"↘";color:var(--acc);font-weight:800;font-size:14px}
+  .jump:hover{border-color:var(--acc);background:#fff;transform:translateY(-1px);box-shadow:0 5px 16px rgba(30,30,60,.09)}
+  .jump .mod{font-size:10px;color:var(--dim);font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:var(--bg2);padding:1px 6px;border-radius:5px}
+  .casehead{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;margin:30px 0 4px}
+  .casehead .tagp{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:6px}
+  details.corrige{margin:14px 0 0;border:1px solid var(--line);border-radius:12px;background:var(--card2);overflow:hidden}
+  details.corrige summary{cursor:pointer;padding:12px 16px;font-weight:700;font-size:14px;color:var(--acc);list-style:none;user-select:none}
+  details.corrige summary::-webkit-details-marker{display:none}
+  details.corrige summary:before{content:"▶";font-size:10px;margin-right:8px}
+  details.corrige[open] summary:before{content:"▼"}
+  details.corrige .cbody{padding:2px 18px 16px;font-size:13.5px}
+  :target{animation:flashtarget 2s ease}
+  @keyframes flashtarget{0%,100%{background:transparent}15%{background:rgba(245,196,81,.22)}}
+  [id^="k-"]{scroll-margin-top:80px;border-radius:8px}
+  .qreflect{border-left:3px solid var(--acc2);background:rgba(124,58,237,.05);border-radius:0 12px 12px 0;padding:13px 16px;margin:12px 0}
+  .qr{font-weight:700;font-size:14.5px;color:var(--txt);margin:0 0 2px}
+  .qr .qhint{display:block;font-weight:500;font-size:12.5px;color:var(--mut);margin-top:3px}
+  .casewrap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:16px 0}
   .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--card2);border:1px solid var(--line);color:var(--mut);margin:2px}
   .pill.a{color:var(--acc);border-color:rgba(108,140,255,.4)}
   .pill.g{color:var(--green);border-color:rgba(52,211,153,.4)}
@@ -443,7 +465,7 @@
 
       <div class="why"><b>L'intuition.</b> Imagine une marque comme une planète. Au centre, un <b>noyau</b> dur, stable, qui définit qui elle est — si tu y touches, elle <em>n'est plus elle-même</em>. Autour, une <b>croûte périphérique</b> souple qui peut changer (logo, goûts, formats) sans trahir le cœur. C'est la <b>théorie d'Abric</b>, née de la psychologie sociale (Moscovici).</p></div>
 
-      <h3>Les définitions exactes (à connaître mot pour mot)</h3>
+      <h3 id="k-noyau">Les définitions exactes (à connaître mot pour mot)</h3>
       <div class="def"><div class="term">Représentation sociale</div><span class="src">Moscovici, 1961</span><p style="margin:6px 0 0">« Une forme de <strong>connaissance socialement élaborée et partagée</strong>, ayant une <strong>visée pratique</strong> et concourant à la <strong>construction d'une réalité commune</strong> à un ensemble social. »</p></div>
       <p class="mut" style="font-size:14px">→ Puis <strong>Abric</strong> vient organiser cette représentation en 2 systèmes :</p>
 
@@ -474,7 +496,7 @@
       </div>
       <div class="infopanel" id="noyauInfo">👆 Clique une des deux zones pour afficher son rôle détaillé.</div>
 
-      <h3>La méthode du TD (à appliquer sur un cas)</h3>
+      <h3 id="k-gonogo">La méthode du TD (à appliquer sur un cas)</h3>
       <p class="mut">On te donnera une marque (Nutella, Apple…) et une extension. Tu dois trancher <strong>GO / NO GO</strong>. Voici la procédure notée :</p>
       <div class="flow" style="flex-direction:column;align-items:stretch;max-width:600px;margin:18px auto">
         <div class="node" style="text-align:left;min-width:auto">1️⃣ <strong>Lister</strong> toutes les associations spontanées de la marque</div>
@@ -495,7 +517,7 @@
       <tr><td>Plan d'action</td><td>/4</td></tr>
       <tr><td>Qualité de l'argumentation</td><td>/2</td></tr></table></div>
 
-      <div class="ex"><div class="h">🔍 Exemple travaillé — le noyau central de <span class="brand">Nutella</span></div>
+      <div class="ex" id="k-nutella"><div class="h">🔍 Exemple travaillé — le noyau central de <span class="brand">Nutella</span></div>
       <p style="font-size:14px;margin-bottom:8px">On liste les associations, on les qualifie, on tranche :</p>
       <table style="font-size:13.5px">
         <tr><th>Association</th><th>Nature</th><th>Intens.</th><th>Unicité</th><th>Verdict</th></tr>
@@ -507,7 +529,7 @@
       </table>
       <p style="margin:6px 0 0;font-size:13.5px">👉 <strong>Test :</strong> enlève le goût chocolat-noisette → ce n'est plus Nutella (noyau). Change le pot → c'est toujours Nutella (périphérie). <br><b>Conséquence pour une extension :</b> « Nutella glace » respecte le noyau (plaisir, choco-noisette) = <span class="verdict v-go">GO</span>. « Nutella salé / apéritif » trahit le noyau gourmand-sucré = <span class="verdict v-no">NO GO</span>.</p></div>
 
-      <h3>Extensions : la matrice de croissance</h3>
+      <h3 id="k-extension">Extensions : la matrice de croissance</h3>
       <div class="diagram">
         <svg viewBox="0 0 520 420" role="img" aria-label="Matrice de croissance">
           <text x="260" y="20" text-anchor="middle" fill="#6b7390" font-size="12">MARQUE →</text>
@@ -659,7 +681,7 @@
         <li><strong>Effet de dotation</strong> → l'<span class="brand">essai gratuit 30 jours</span> : une fois que tu « possèdes », tu ne veux plus rendre.</li>
       </ul></div>
 
-      <h3>La TPB / TAP — Théorie de l'Action Planifiée (Ajzen 1991) <span style="color:var(--orange)">★</span></h3>
+      <h3 id="k-tap">La TPB / TAP — Théorie de l'Action Planifiée (Ajzen 1991) <span style="color:var(--orange)">★</span></h3>
       <p class="mut">L'arme n°3. Modèle qui prédit le comportement. À savoir schématiser ET appliquer (cas « Emma part en échange ? »).</p>
       <div class="diagram">
         <svg viewBox="0 0 640 250" role="img" aria-label="Théorie de l'action planifiée">
@@ -679,7 +701,7 @@
         <div class="cap">Attitude + Norme + Contrôle perçu → Intention → Comportement</div>
       </div>
 
-      <h3>Cialdini — les 6 leviers d'influence</h3>
+      <h3 id="k-cialdini">Cialdini — les 6 leviers d'influence</h3>
       <div class="grid3">
         <div class="card" style="margin:6px 0;padding:14px"><strong>👥 Preuve sociale</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">on imite les autres</p></div>
         <div class="card" style="margin:6px 0;padding:14px"><strong>🎓 Autorité</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">on suit les experts</p></div>
@@ -723,13 +745,13 @@
 
       <div class="why"><b>L'intuition.</b> Deux marques sur le même marché : pourquoi l'une gagne durablement ? La RBV répond : parce qu'elle possède des <b>ressources</b> que les autres ne peuvent pas copier (sa communauté, sa data, son design, sa culture). <b>Une marque = un portefeuille de ressources.</b></p></div>
 
-      <h3>Distinction fondamentale : Stratégie ≠ Activation</h3>
+      <h3 id="k-stratactiv">Distinction fondamentale : Stratégie ≠ Activation</h3>
       <div class="grid2">
         <div class="card" style="border-color:var(--acc)"><strong style="color:var(--acc)">STRATÉGIE</strong><p style="font-size:14px">Cohérence &amp; différenciation. Positionnement, proposition de valeur, ressources clés. <em>Le fond.</em></p></div>
         <div class="card" style="border-color:var(--gold)"><strong style="color:var(--gold)">ACTIVATION</strong><p style="font-size:14px">Expression &amp; visibilité. Campagnes, social media, influence, contenus. <em>La forme.</em></p></div>
       </div>
 
-      <h3>Le test VRIN (Barney 1991)</h3>
+      <h3 id="k-vrin">Le test VRIN (Barney 1991)</h3>
       <p class="mut">Une ressource crée un avantage <strong>durable</strong> seulement si elle coche les 4 :</p>
       <div class="diagram">
         <svg viewBox="0 0 600 130" role="img" aria-label="VRIN">
@@ -760,7 +782,7 @@
         <div class="node" style="border-color:var(--gold)">ACTIVATION<small>EPIC·MEME·PAST</small></div>
       </div>
 
-      <div class="card"><h4 style="margin-top:0">📦 Cas Cabaia (à connaître)</h4><p style="font-size:14px"><strong>DNVB</strong> (Digitally Native Vertical Brand) française, sacs personnalisables. Part de marché FR ≈ <strong>5 %</strong> (CA ≈ 28 M€ / marché ≈ 530-616 M€). Avantage durable car le <strong>bundle</strong> (communauté + co-création + design + verticalité + valeurs RSE) est <em>socialement complexe → inimitable</em>. Modèle « Brand as a Service ». Échappe au <strong>competitive convergence trap</strong> (Porter : quand tous les concurrents finissent identiques) par sa différenciation identitaire.</p></div>
+      <div class="card" id="k-cabaia"><h4 style="margin-top:0">📦 Cas Cabaia (à connaître)</h4><p style="font-size:14px"><strong>DNVB</strong> (Digitally Native Vertical Brand) française, sacs personnalisables. Part de marché FR ≈ <strong>5 %</strong> (CA ≈ 28 M€ / marché ≈ 530-616 M€). Avantage durable car le <strong>bundle</strong> (communauté + co-création + design + verticalité + valeurs RSE) est <em>socialement complexe → inimitable</em>. Modèle « Brand as a Service ». Échappe au <strong>competitive convergence trap</strong> (Porter : quand tous les concurrents finissent identiques) par sa différenciation identitaire.</p></div>
       <div class="keep"><div class="h">⭐ À retenir</div>RBV = avantage <strong>interne</strong>. Treacy &amp; Wiersema (3 disciplines : excellence opérationnelle / leadership produit / intimité client) = niveau <strong>marché</strong>. Complémentaires. Le vrai risque contemporain = <strong>substituabilité</strong>, pas invisibilité.</div>
     </section>
 
@@ -886,42 +908,111 @@
 
     <!-- MODULE 10 -->
     <section id="m10" data-mod>
-      <span class="eyebrow">🎯 Module 10</span>
-      <h2 class="title">Cas pratiques (formats d'examen)</h2>
-      <p class="lead">Ce que tu auras probablement à composer demain. Mémorise la <strong>structure de réponse</strong> de chaque type.</p>
+      <span class="eyebrow">🎯 Module 10 · le cœur de l'apprentissage</span>
+      <h2 class="title">Cas pratiques — entraîne-toi pour de vrai</h2>
+      <p class="lead">C'est ici que tu apprends vraiment. Pour chaque cas : <strong>réfléchis d'abord</strong> aux questions, et si tu bloques, clique le <strong>bouton du concept</strong> pour aller le réviser, puis ouvre le <strong>corrigé</strong>.</p>
 
-      <h3>🧬 Cas type « Noyau central GO/NO GO » (le + probable)</h3>
-      <div class="card"><p style="font-size:14px"><strong>Énoncé type :</strong> « Coca-Cola lance Coca Focus (boisson énergisante). Bon ou mauvais ? »<br><strong>Plan de réponse :</strong></p>
-        <ol style="margin:0 0 0 20px;font-size:14px;color:#2c2e38">
-          <li>Identifier le <strong>noyau central</strong> de Coca (5 assos max : plaisir, partage, américanité, rouge, recette secrète…).</li>
-          <li>Diagnostiquer : extension de gamme ou de marque ? (Focus = adjacent risqué).</li>
-          <li>Compatibilité : l'extension respecte-t-elle le noyau ? (énergie ≠ plaisir-partage → tension).</li>
-          <li><strong>Décision</strong> GO/NO GO/sous conditions + justification.</li>
-          <li>Si GO → mix de lancement (cible, bénéfice, preuve, prix, canal).</li>
-        </ol>
+      <div class="why"><b>🔄 La méthode (apprentissage actif).</b> 1) Lis l'énoncé. 2) Réponds aux <span style="color:var(--acc2);font-weight:700">🤔 questions violettes</span> dans ta tête (ou à l'écrit). 3) Bloqué ? Clique un <span style="color:var(--acc);font-weight:700">↘ bouton-concept</span> → il te téléporte au chapitre exact. 4) Compare avec le <strong>corrigé déroulant</strong>. Se tester AVANT de relire = la technique d'étude la plus efficace qui existe.</p></div>
+
+      <!-- CAS 1 -->
+      <div class="casehead">🧬 Cas n°1 — Noyau central GO/NO GO <span class="tagp b-red">le + probable</span></div>
+      <div class="casewrap">
+        <p style="font-size:14px;margin-bottom:4px"><strong>Énoncé :</strong> « Coca-Cola lance <em>Coca Focus</em>, une boisson énergisante. Bonne ou mauvaise idée ? Justifiez (GO / NO GO). »</p>
+
+        <div class="qreflect"><p class="qr">🤔 Q1. Quel est le <u>noyau central</u> de Coca-Cola ? Cite 4-5 associations et qualifie-les (Nature F/S/E, Intensité, Unicité).<span class="qhint">Si tu ne sais pas trier noyau vs périphérie → révise la théorie + la grille.</span></p>
+          <div class="jumprow"><span class="jumplabel">🔑 Concepts pour répondre</span>
+            <a class="jump" href="#k-noyau">Théorie du noyau central (Abric) <span class="mod">M3</span></a>
+            <a class="jump" href="#k-nutella">Exemple Nutella travaillé <span class="mod">M3</span></a>
+          </div>
+        </div>
+
+        <div class="qreflect"><p class="qr">🤔 Q2. Coca Focus, c'est une extension de <u>gamme</u> ou de <u>marque</u> ? Et respecte-t-elle le noyau ?<span class="qhint">Indice : « énergie/performance » colle-t-il avec « plaisir/partage » ?</span></p>
+          <div class="jumprow"><span class="jumplabel">🔑 Concepts pour répondre</span>
+            <a class="jump" href="#k-extension">Extension gamme vs marque <span class="mod">M3</span></a>
+            <a class="jump" href="#k-gonogo">Méthode GO/NO GO + grille <span class="mod">M3</span></a>
+          </div>
+        </div>
+
+        <div class="qreflect"><p class="qr">🤔 Q3. Ta décision : GO, NO GO, ou GO sous conditions ? Et si GO, quel mix de lancement (cible, prix, canal) ?</p></div>
+
+        <details class="corrige"><summary>Voir le corrigé rédigé</summary>
+          <div class="cbody">
+            <p><strong>1. Noyau central de Coca :</strong> plaisir/partage (E, intensité 9), américanité-fun (S, 8), couleur rouge + recette secrète (F/S, 8, unicité 9). → noyau = <em>plaisir hédonique &amp; convivialité</em>.</p>
+            <p><strong>2. Diagnostic :</strong> Coca Focus = extension de <strong>gamme</strong> limite (toujours une boisson, mais segment énergisant adjacent). Or « énergie/performance/concentration » entre en <strong>tension</strong> avec le noyau « plaisir/détente/partage ». On touche à la zone rouge.</p>
+            <p><strong>3. Décision : NO GO (ou GO sous conditions).</strong> Lancer sous la marque-mère Coca risque de <em>diluer/dénaturer</em> le noyau. Alternative moins risquée : une <strong>marque distincte endossée</strong> (comme Coca a fait avec d'autres gammes) pour capter le segment sans abîmer l'ADN. Si GO malgré tout : cible jeunes urbains, prix premium, canal CHR/sport, message qui relie énergie ET plaisir (pas la performance pure).</p>
+            <p style="margin:0"><strong>Conclusion (le pont) :</strong> relie au capital-marque (M4) — toucher au noyau fragilise la fidélité (BRQ, M6).</p>
+          </div>
+        </details>
       </div>
 
-      <h3>♟️ Cas type « Cabaia / RBV »</h3>
-      <div class="card"><p style="font-size:14px"><strong>4 questions types :</strong></p>
-        <ul class="clean" style="font-size:14px">
-          <li>Les ressources de Cabaia = avantage durable ? → passer chaque ressource au crible <strong>VRIN</strong> ; conclure que c'est le <em>bundle</em> qui est inimitable.</li>
-          <li>Stratégie ou activation ? → très forte en activation (viral, drops, communauté) ; risque = dépendance au buzz court terme.</li>
-          <li>« Brand as a Service » → vend une expérience + service relationnel (personnalisation, garantie à vie, co-création).</li>
-          <li>Évite le competitive convergence trap ? → oui, par différenciation identitaire (design, ton, RSE) pas par le prix.</li>
-        </ul>
+      <!-- CAS 2 -->
+      <div class="casehead">♟️ Cas n°2 — Cabaia / RBV <span class="tagp b-red">très probable</span></div>
+      <div class="casewrap">
+        <p style="font-size:14px;margin-bottom:4px"><strong>Énoncé :</strong> dossier sur <em>Cabaia</em> (DNVB française, sacs personnalisables) — 4 questions.</p>
+
+        <div class="qreflect"><p class="qr">🤔 Q1. Les ressources de Cabaia constituent-elles un avantage concurrentiel <u>durable</u> ?<span class="qhint">Passe chaque ressource (communauté, design, data, verticalité) au crible des 4 lettres.</span></p>
+          <div class="jumprow"><span class="jumplabel">🔑 Concepts pour répondre</span>
+            <a class="jump" href="#k-vrin">Le test VRIN (Barney) <span class="mod">M7</span></a>
+            <a class="jump" href="#k-cabaia">Le cas Cabaia détaillé <span class="mod">M7</span></a>
+          </div>
+        </div>
+
+        <div class="qreflect"><p class="qr">🤔 Q2. Cabaia mise-t-elle plutôt sur la <u>stratégie</u> ou sur l'<u>activation</u> ? Quel risque ?</p>
+          <div class="jumprow"><span class="jumplabel">🔑 Concepts pour répondre</span>
+            <a class="jump" href="#k-stratactiv">Stratégie ≠ Activation <span class="mod">M7</span></a>
+          </div>
+        </div>
+
+        <div class="qreflect"><p class="qr">🤔 Q3. En quoi évite-t-elle le « competitive convergence trap » ?<span class="qhint">Par le prix… ou par autre chose ?</span></p></div>
+
+        <details class="corrige"><summary>Voir le corrigé rédigé</summary>
+          <div class="cbody">
+            <p><strong>1. VRIN :</strong> chaque ressource isolée est imitable (un design coloré, une appli…). Mais le <strong>bundle</strong> communauté + co-création + verticalité (DNVB) + valeurs RSE est <em>socialement complexe</em> → <strong>Inimitable</strong> et <strong>Non-substituable</strong>. C'est l'assemblage qui crée l'avantage durable.</p>
+            <p><strong>2. Stratégie vs activation :</strong> Cabaia est <strong>très forte en activation</strong> (viral, drops, communauté, influence). Risque = dépendance au buzz court terme / nouveauté permanente, au détriment d'une stratégie de fond → essoufflement possible.</p>
+            <p style="margin:0"><strong>3. Convergence trap :</strong> elle l'évite par <strong>différenciation identitaire</strong> (design, ton fun, RSE, communauté) — PAS par une guerre de prix. « Brand as a Service » : vend une expérience + service relationnel (perso, garantie à vie).</p>
+          </div>
+        </details>
       </div>
 
-      <h3>🧠 Cas type « TAP » (persona Emma)</h3>
-      <div class="card"><p style="font-size:14px">Diagnostiquer quel déterminant bloque l'intention, puis concevoir le message :</p>
-        <ul class="clean" style="font-size:14px">
-          <li><strong>Attitude</strong> faible → montrer les bénéfices (CV, expérience).</li>
-          <li><strong>Norme</strong> contre → témoignages de pairs, « tout le monde le fait ».</li>
-          <li><strong>Contrôle perçu</strong> faible → lever les obstacles (bourses, cours d'anglais, accompagnement).</li>
-        </ul>
+      <!-- CAS 3 -->
+      <div class="casehead">🧠 Cas n°3 — TAP (persona Emma) <span class="tagp b-org">probable</span></div>
+      <div class="casewrap">
+        <p style="font-size:14px;margin-bottom:4px"><strong>Énoncé :</strong> Emma hésite à partir en échange. Attitude + (CV) mais parents contre (norme) et doute de son anglais/budget (contrôle). Conçois la campagne.</p>
+
+        <div class="qreflect"><p class="qr">🤔 Q1. Quel(s) déterminant(s) bloque(nt) l'intention d'Emma — Attitude, Norme, ou Contrôle perçu ?<span class="qhint">Repère lequel est faible : c'est lui qu'il faut viser.</span></p>
+          <div class="jumprow"><span class="jumplabel">🔑 Concepts pour répondre</span>
+            <a class="jump" href="#k-tap">Le modèle TPB/TAP (Ajzen) <span class="mod">M6</span></a>
+            <a class="jump" href="#k-cialdini">Cialdini (agir sur les normes) <span class="mod">M6</span></a>
+          </div>
+        </div>
+
+        <div class="qreflect"><p class="qr">🤔 Q2. Quel message pour chaque levier bloquant ?</p></div>
+
+        <details class="corrige"><summary>Voir le corrigé rédigé</summary>
+          <div class="cbody">
+            <p>Emma a déjà une <strong>attitude +</strong>. Les freins = <strong>Norme</strong> (parents contre) et <strong>Contrôle perçu</strong> (anglais/budget). On cible ces deux-là :</p>
+            <p>• <strong>Norme</strong> → témoignages de pairs &amp; d'anciens (« tout le monde le fait, ça se passe bien ») + rassurer les parents (Cialdini : preuve sociale + autorité).<br>• <strong>Contrôle perçu</strong> → lever les obstacles concrets : bourses Erasmus, cours d'anglais gratuits, accompagnement administratif → « tu en es capable ».</p>
+            <p style="margin:0">Inutile de marteler les bénéfices (attitude déjà acquise) : ce serait taper à côté.</p>
+          </div>
+        </details>
       </div>
 
-      <h3>📦 Cas type « Portefeuille / LU »</h3>
-      <div class="card"><p style="font-size:14px"><strong>Pareto 80/20</strong> (10-20% des réfs = 70-80% du CA) + <strong>matrice BCG</strong> (Stars / Vaches à lait / Dilemmes / Poids morts). Risque de sur-concentration : dépendance excessive aux « héros » (ex. Prince) → vulnérabilité bad buzz. Critères mesurables d'arbitrage : marge nette (logistique incluse), rotation, cannibalisation, complexité industrielle.</p></div>
+      <!-- CAS 4 -->
+      <div class="casehead">📦 Cas n°4 — Portefeuille / LU <span class="tagp b-yel">à savoir</span></div>
+      <div class="casewrap">
+        <p style="font-size:14px;margin-bottom:4px"><strong>Énoncé :</strong> LU réduit ses références (170 → 100). Justifie avec Pareto + BCG, et identifie les risques.</p>
+        <div class="qreflect"><p class="qr">🤔 Q1. Pourquoi couper des références peut-il <u>augmenter</u> les ventes ? (pense Pareto 80/20)<br>🤔 Q2. Quels risques à trop dépendre d'un « héros » comme Prince ?<span class="qhint">Lien avec l'extension de gamme : trop de variantes = poids morts + cannibalisation.</span></p>
+          <div class="jumprow"><span class="jumplabel">🔑 Concept lié</span>
+            <a class="jump" href="#k-extension">Extension de gamme &amp; cannibalisation <span class="mod">M3</span></a>
+          </div>
+        </div>
+        <details class="corrige"><summary>Voir le corrigé rédigé</summary>
+          <div class="cbody">
+            <p><strong>Pareto :</strong> ~20 % des références font ~80 % du CA. Couper les 80 % de réfs faibles = moins de complexité, meilleure visibilité en rayon, logistique allégée → les volumes des best-sellers montent (+9 % chez LU). <strong>BCG :</strong> garder les Vaches à lait/Stars (Prince), supprimer les Poids morts, trancher les Dilemmes sur critères mesurables (marge nette, rotation, cannibalisation).</p>
+            <p style="margin:0"><strong>Risques de sur-concentration :</strong> dépendance excessive à Prince → vulnérabilité (bad buzz, crise qualité), perte de niches rentables, segment laissé au concurrent.</p>
+          </div>
+        </details>
+      </div>
 
       <div class="keep"><div class="h">⭐ Conseil de copie</div>Toujours : (1) définir le concept mobilisé avec son auteur, (2) l'appliquer au cas avec des éléments concrets, (3) trancher clairement, (4) conclure par un <strong>pont</strong> (fil rouge). Un correcteur adore une copie qui <em>relie</em>.</div>
       <p style="text-align:center;margin-top:30px"><a href="#flash" class="btn prim" style="display:inline-block;text-decoration:none">→ Maintenant, entraîne-toi : Flashcards</a></p>
