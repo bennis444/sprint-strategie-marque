@@ -109,6 +109,24 @@
   :target{animation:flashtarget 2s ease}
   @keyframes flashtarget{0%,100%{background:transparent}15%{background:rgba(245,196,81,.22)}}
   [id^="k-"]{scroll-margin-top:80px;border-radius:8px}
+  /* mémo / mnémotechniques */
+  .memogrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  @media(max-width:820px){.memogrid{grid-template-columns:1fr}}
+  .acro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+  .acro .at{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px}
+  .acroword{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+  .acroword span{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 4px;border-radius:9px;background:var(--card2);border:1px solid var(--line);font-weight:800;font-size:17px;color:var(--acc)}
+  .acrolines{font-size:13.5px;margin-bottom:10px}
+  .acrolines div{padding:2.5px 0;color:#2c2e38}
+  .acrolines b{color:var(--acc);font-weight:800}
+  .acrotrick{font-size:13px;background:rgba(245,196,81,.10);border-left:3px solid var(--gold);border-radius:0 9px 9px 0;padding:8px 12px;color:#2c2e38}
+  .acrotrick b{color:var(--gold)}
+  .acrolink{display:inline-block;margin-top:8px;font-size:12px;color:var(--acc);font-weight:700;text-decoration:none}
+  details.recall{margin:0}
+  details.recall summary{cursor:pointer;list-style:none;color:var(--acc);font-weight:700;font-size:12.5px}
+  details.recall summary::-webkit-details-marker{display:none}
+  details.recall summary:before{content:"🧠 Teste-toi (révéler) ";font-weight:600}
+  details.recall[open] summary:before{content:"🧠 Réponse :";color:var(--dim)}
   .qreflect{border-left:3px solid var(--acc2);background:rgba(124,58,237,.05);border-radius:0 12px 12px 0;padding:13px 16px;margin:12px 0}
   .qr{font-weight:700;font-size:14.5px;color:var(--txt);margin:0 0 2px}
   .qr .qhint{display:block;font-weight:500;font-size:12.5px;color:var(--mut);margin-top:3px}
@@ -219,6 +237,7 @@
     </nav>
     <div class="navsec">S'entraîner</div>
     <nav>
+      <a href="#memo" data-s="memo"><span class="ico">🧠</span>Mémo &amp; mnémo<span class="dot"></span></a>
       <a href="#flash" data-s="flash"><span class="ico">🃏</span>Flashcards<span class="dot"></span></a>
       <a href="#quiz" data-s="quiz"><span class="ico">✅</span>Quiz noté<span class="dot"></span></a>
     </nav>
@@ -1057,6 +1076,89 @@
 
       <div class="keep"><div class="h">⭐ Conseil de copie</div>Toujours : (1) définir le concept mobilisé avec son auteur, (2) l'appliquer au cas avec des éléments concrets, (3) trancher clairement, (4) conclure par un <strong>pont</strong> (fil rouge). Un correcteur adore une copie qui <em>relie</em>.</div>
       <p style="text-align:center;margin-top:30px"><a href="#flash" class="btn prim" style="display:inline-block;text-decoration:none">→ Maintenant, entraîne-toi : Flashcards</a></p>
+    </section>
+
+    <!-- MEMO -->
+    <section id="memo" data-mod>
+      <span class="eyebrow">🧠 Mémo &amp; mnémotechniques</span>
+      <h2 class="title">Retenir TOUS les acronymes</h2>
+      <p class="lead">Chaque sigle décortiqué lettre par lettre + <strong>un truc pour le graver</strong>. Lis le « 💡 truc » à voix haute : c'est lui qui colle.</p>
+
+      <div class="memogrid">
+        <div class="acro"><div class="at">🚀 Activation · Scholz</div>
+          <div class="acroword"><span>E</span><span>P</span><span>I</span><span>C</span></div>
+          <div class="acrolines"><div><b>E</b>ssence — l'âme, la raison d'être</div><div><b>P</b>ersonify — un archétype (héros, sage…)</div><div><b>I</b>nflect — une nuance, pour éviter le cliché</div><div><b>C</b>atalogue — les éléments visuels (via SMART)</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> fais un film <b>ÉPIC</b> de ta marque : son <b>â</b>me → un <b>h</b>éros → une <b>t</b>ouche perso → le <b>c</b>atalogue d'images. EPIC = une histoire (= storytelling visuel).</div>
+        </div>
+
+        <div class="acro"><div class="at">🚀 sous-outil d'EPIC · ≠ gestion de projet</div>
+          <div class="acroword"><span>S</span><span>M</span><span>A</span><span>R</span><span>T</span></div>
+          <div class="acrolines"><div><b>S</b>ymbols — objets, personnes, animaux</div><div><b>M</b>ovements — gestes, micro-actions</div><div><b>A</b>reas — décor, agencement de la scène</div><div><b>R</b>elations — couleur, ligne, forme, cadrage</div><div><b>T</b>one — ambiance, émotion globale</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> pour décrire une <b>IMAGE</b> : les objets (S), les gestes (M), le décor (A), les couleurs/formes (R), l'ambiance (T). ⚠️ RIEN à voir avec le SMART « objectifs » (Spécifique-Mesurable…).</div>
+        </div>
+
+        <div class="acro"><div class="at">♟️ RBV · Barney</div>
+          <div class="acroword"><span>V</span><span>R</span><span>I</span><span>N</span></div>
+          <div class="acrolines"><div><b>V</b>aluable — crée de la valeur</div><div><b>R</b>are — peu la possèdent</div><div><b>I</b>nimitable — coûteuse à copier</div><div><b>N</b>on-substituable — pas d'équivalent</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> <b>VRIN</b> se lit comme <b>VRAI</b> → un VRAI avantage durable coche les 4. Ajoute un <b>O</b>rganisé = <b>VRIO</b>.</div>
+        </div>
+
+        <div class="acro"><div class="at">🧬 Grille du noyau central</div>
+          <div class="acroword"><span>F</span><span>S</span><span>E</span><span class="sub" style="font-size:12px;color:var(--dim);font-weight:700;margin-left:4px">+ I·U·V</span></div>
+          <div class="acrolines"><div><b>F</b>onctionnelle — ça <em>sert</em> (goût, prix)</div><div><b>S</b>ymbolique — ça <em>signifie</em> (statut, valeurs)</div><div><b>E</b>xpérientielle — ça <em>fait ressentir</em> (plaisir)</div><div style="margin-top:4px"><b>I</b>ntensité (0-10) · <b>U</b>nicité (0-10) · <b>V</b>alence (−10/+10)</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> pour chaque association → sa <b>nature</b> (Sert / Signifie / Ressentir = F·S·E), puis 3 notes : est-elle <b>ancrée</b> (I), <b>à nous</b> (U), <b>positive</b> (V) ? Noyau si I≥8 et U≥7.</div>
+        </div>
+
+        <div class="acro"><div class="at">💎 Capital-marque · Keller</div>
+          <div class="acroword"><span>N</span><span>I</span><span>Q</span><span>F</span></div>
+          <div class="acrolines"><div><b>N</b>otoriété — on me connaît (la base)</div><div><b>I</b>mage — on sait qui je suis</div><div><b>Q</b>ualité perçue — on me trouve bon</div><div><b>F</b>idélité — on me reste fidèle (le sommet)</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> l'escalier de la relation, de bas en haut : <b>C</b>onnu → <b>C</b>ompris → <b>A</b>pprécié → <b>F</b>idèle. On monte marche après marche.</div>
+        </div>
+
+        <div class="acro"><div class="at">💎 Paper Pfeifer (contre-intuitif !)</div>
+          <div class="acroword"><span>RS</span><span style="color:var(--green)">+</span><span>ED</span><span style="color:var(--red)">−</span></div>
+          <div class="acrolines"><div><b>RS</b> = Relevant Stature (notoriété+estime) → <b style="color:var(--green)">effet POSITIF</b>, protège</div><div><b>ED</b> = Energized Differentiation (unicité) → <b style="color:var(--red)">effet NÉGATIF</b>, niche fragile</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> <b>RS</b> = <b>R</b>assurant &amp; <b>S</b>olide (✅ ça protège). <b>ED</b> = <b>E</b>xcès de <b>D</b>ifférenciation (❌ ça fragilise). La différenciation extrême = piège.</div>
+        </div>
+
+        <div class="acro"><div class="at">🧠 Comportement · Ajzen (TAP/TPB)</div>
+          <div class="acroword"><span>A</span><span>N</span><span>C</span><span class="sub" style="font-size:13px;color:var(--dim);font-weight:700;margin-left:4px">→ I → C</span></div>
+          <div class="acrolines"><div><b>A</b>ttitude — est-ce désirable pour moi ?</div><div><b>N</b>orme subjective — les autres approuvent ?</div><div><b>C</b>ontrôle perçu — je m'en sens capable ?</div><div style="margin-top:3px">→ <b>I</b>ntention → <b>C</b>omportement</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> « j'ai <b>ANC</b>ré ma décision » : <b>A</b>i-je envie ? les <b>a</b>utres (N) ? je <b>p</b>eux (C) ? → Intention → Comportement.</div>
+        </div>
+
+        <div class="acro"><div class="at">⚖️ Validité d'une marque · INPI</div>
+          <div class="acroword"><span>D</span><span>L</span><span>N</span><span>D</span></div>
+          <div class="acrolines"><div><b>D</b>istinctive — ni générique ni descriptive</div><div><b>L</b>icite — conforme à l'ordre public</div><div><b>N</b>on-déceptive — ne trompe pas</div><div><b>D</b>isponible — libre de droits antérieurs</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> une marque valide passe les 4 « D-L-N-D ». Retiens les 2 D qui encadrent : <b>D</b>istinctive au début, <b>D</b>isponible à la fin.</div>
+        </div>
+
+        <div class="acro"><div class="at">🎭 Identité · Kapferer (6 facettes)</div>
+          <div class="acroword"><span>P</span><span>P</span><span>R</span><span>C</span><span>R</span><span>M</span></div>
+          <div class="acrolines"><div>Émetteur (haut) : <b>P</b>hysique · <b>P</b>ersonnalité · <b>C</b>ulture</div><div>Récepteur (bas) : <b>R</b>elation · <b>R</b>eflet · <b>M</b>entalisation</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> 3 côtés marque (Physique, Personnalité, Culture) + 3 côtés client (Relation, Reflet, Mentalisation). Les 2 <b>R</b> + le <b>M</b> = ce qui touche le conso.</div>
+        </div>
+
+        <div class="acro"><div class="at">🎭 3 niveaux sémiotiques · Heilbrunn</div>
+          <div class="acroword"><span>F</span><span>N</span><span>A</span></div>
+          <div class="acrolines"><div><b>F</b>iguratif — ce qu'on VOIT (logo, pack) = esthétique</div><div><b>N</b>arratif — ce que ça RACONTE (contrat→sanction)</div><div><b>A</b>xiologique — ce que ça VAUT (valeurs) = éthique</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> de la surface au fond : <b>V</b>oir → <b>R</b>aconter → <b>V</b>aleurs. (F-N-A = « FiNA » comme la fin, le fond.)</div>
+        </div>
+
+        <div class="acro"><div class="at">🧠 Influence · Cialdini (6 leviers)</div>
+          <div class="acroword"><span>P</span><span>A</span><span>R</span><span>E</span><span>R</span><span>S</span></div>
+          <div class="acrolines"><div><b>P</b>reuve sociale · <b>A</b>utorité · <b>R</b>areté</div><div><b>E</b>ngagement · <b>R</b>éciprocité · <b>S</b>ympathie</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> « <b>PARERS</b> » (comme « parer » un coup). Un influenceur cumule Autorité + Sympathie + Preuve sociale.</div>
+        </div>
+
+        <div class="acro"><div class="at">🚀 PAST · 4 thèmes du passé · Pecot</div>
+          <div class="acroword"><span>L</span><span>H</span><span>N</span><span>A</span></div>
+          <div class="acrolines"><div><b>L</b>egitimizing (56%) — l'ancienneté = compétence</div><div><b>H</b>umorous (41%) — autodérision = « fun donc moderne »</div><div><b>N</b>ostalgic (24%) — refuge contre le présent</div><div><b>A</b>esthetic (28%) — univers stylistique du passé</div></div>
+          <div class="acrotrick">💡 <b>Le truc :</b> le passé sert à : <b>L</b>égitimer · faire rire (<b>H</b>) · faire rêver d'avant (<b>N</b>) · faire beau (<b>A</b>). Piège : Nostalgic ≠ Legitimizing.</div>
+        </div>
+      </div>
+
+      <div class="keep"><div class="h">⭐ Méthode pour graver un acronyme</div>(1) Lis le « 💡 truc » à voix haute 2 fois. (2) Cache la carte, récite les lettres. (3) Donne 1 exemple de marque pour chaque. Refais-le demain matin : 3 passages espacés suffisent à fixer pour l'examen.</div>
     </section>
 
     <!-- FLASHCARDS -->
