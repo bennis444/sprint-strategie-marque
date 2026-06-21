@@ -63,6 +63,18 @@
   .keep .h{font-weight:800;color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
   .trap{background:linear-gradient(135deg,rgba(251,113,133,.10),rgba(251,113,133,.02));border:1px solid rgba(251,113,133,.3);border-radius:14px;padding:14px 18px;margin:16px 0}
   .trap .h{font-weight:800;color:var(--red);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .ex{background:linear-gradient(135deg,rgba(34,211,238,.10),rgba(34,211,238,.02));border:1px solid rgba(34,211,238,.32);border-radius:14px;padding:16px 20px;margin:18px 0}
+  .ex .h{font-weight:800;color:var(--cyan);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;gap:8px;align-items:center}
+  .ex b{color:var(--cyan)}
+  .ex .brand{display:inline-block;font-weight:800;color:#fff;background:rgba(34,211,238,.16);border:1px solid rgba(34,211,238,.4);border-radius:8px;padding:1px 9px;margin:0 2px;font-size:.95em}
+  .ex p{margin-bottom:8px}
+  .ex ul.clean li:before{color:var(--cyan)}
+  .exrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:820px){.exrow{grid-template-columns:1fr}}
+  .exmini{background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:13.5px}
+  .exmini .bn{font-weight:800;color:#fff;font-size:14.5px;margin-bottom:3px}
+  .verdict{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  .v-go{color:var(--green)} .v-no{color:var(--red)} .v-mid{color:var(--gold)}
   .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--card2);border:1px solid var(--line);color:var(--mut);margin:2px}
   .pill.a{color:var(--acc);border-color:rgba(108,140,255,.4)}
   .pill.g{color:var(--green);border-color:rgba(52,211,153,.4)}
@@ -188,7 +200,7 @@
       <h2 class="title">Stratégie de Marque,<br>de <span style="background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent">zéro à prêt</span> en une nuit.</h2>
       <p class="lead">Tu n'as aucune base ? Parfait. Ce parcours part du tout début (« c'est quoi une marque ? ») et monte marche par marche jusqu'aux cas que tu auras à composer demain. Chaque notion est <strong>expliquée simplement</strong>, puis <strong>dessinée</strong> (tu es visuel → tout est en schéma), puis <strong>testée</strong>.</p>
 
-      <div class="why"><b>💡 Comment apprendre vite ?</b> Pour chaque module : (1) lis le bloc vert <em>« Pourquoi ça existe »</em> — c'est l'intuition. (2) Regarde le schéma jusqu'à pouvoir le redessiner de tête. (3) Lis le bloc or <em>« À retenir »</em>. (4) À la fin, fais les <strong>flashcards</strong> + le <strong>quiz</strong>. Marque chaque module « lu » (bouton en haut) pour suivre ta barre de progression.</p></div>
+      <div class="why"><b>💡 Comment apprendre vite ?</b> Pour chaque module : (1) lis le bloc vert <em>« Pourquoi ça existe »</em> — c'est l'intuition. (2) Regarde le schéma jusqu'à pouvoir le redessiner de tête. (3) Lis les blocs <span style="color:var(--cyan);font-weight:700">🔍 cyan « exemple concret »</span> — c'est là que ça devient clair, avec des marques que tu connais. (4) Mémorise le bloc or <em>« À retenir »</em>. (5) Fais les <strong>flashcards</strong> + le <strong>quiz</strong>. Marque chaque module « lu » pour suivre ta progression.</p></div>
 
       <h3>Ordre d'attaque (priorité examen)</h3>
       <div class="sprintgrid">
@@ -248,6 +260,21 @@
         <div class="cap">Évolution : Signature → Garantie → Lien → Symbole → Co-construction</div>
       </div>
 
+      <div class="ex"><div class="h">🔍 Exemple concret — <span class="brand">Coca-Cola</span> à travers les 4 couches</div>
+      <ul class="clean">
+        <li><strong>Signature</strong> (1886) : John Pemberton crée la recette, la <em>signe</em>. Le nom manuscrit « Coca-Cola » = sa signature, encore le logo aujourd'hui.</li>
+        <li><strong>Garantie</strong> : tu achètes une canette à Tokyo ou à Strasbourg → <em>même goût garanti</em>. La marque promet une qualité constante.</li>
+        <li><strong>Lien</strong> (vendeur silencieux) : dans un rayon avec 30 sodas et zéro vendeur, le rouge + le logo te « parlent » et te font choisir, tout seul.</li>
+        <li><strong>Symbole</strong> : Coca ne te vend plus un liquide sucré, il te vend du <em>partage, du bonheur, Noël</em> (« Open Happiness »). C'est le tournant symbolique.</li>
+      </ul>
+      <p style="margin:6px 0 0;font-size:13.5px">👉 Une seule marque illustre TOUTE l'évolution historique. Si tu retiens Coca, tu retiens le schéma.</p></div>
+
+      <div class="ex"><div class="h">🔍 Deux mécanismes, deux marques</div>
+      <div class="exrow">
+        <div class="exmini"><div class="bn">🤫 Vendeur silencieux</div><span class="brand">Nike</span> : dans un magasin, une basket avec le <em>swoosh</em> n'a besoin d'aucun vendeur pour signaler « performance, cool, premium ». Le logo vend à la place de l'humain.</div>
+        <div class="exmini"><div class="bn">✨ Tournant symbolique</div><span class="brand">Apple</span> : ne vend pas des caractéristiques techniques (RAM, processeur) mais une idée — « Think Different », la créativité. Le produit s'efface derrière l'idéal.</div>
+      </div></div>
+
       <div class="grid2">
         <div class="def"><div class="term">Le « vendeur silencieux »</div><span class="src">Vance Packard</span><p style="margin:6px 0 0">Quand fabrication et vente se séparent (grands magasins), la marque recrée un <strong>lien direct</strong> entre l'industriel et le consommateur, sans vendeur humain. Le packaging « parle » à ta place.</p></div>
         <div class="def"><div class="term">Le tournant symbolique</div><span class="src">Burnett, Ogilvy, Dichter</span><p style="margin:6px 0 0">La marque <strong>se déconnecte du produit pour incarner des idéaux</strong> (bonheur, succès, modernité). On ne vend plus un savon, on vend une vie rêvée. C'est le « décrochage » fonctionnel / aspirationnel.</p></div>
@@ -303,6 +330,17 @@
         <div class="cap">Prisme de Kapferer — Physique · Personnalité · Relation · Culture · Reflet · Mentalisation</div>
       </div>
 
+      <div class="ex"><div class="h">🔍 Le prisme appliqué à <span class="brand">Nike</span> (modèle de réponse d'examen)</div>
+      <ul class="clean" style="font-size:14px">
+        <li><strong>Physique</strong> : le swoosh, les baskets, le noir/blanc, « Just Do It ».</li>
+        <li><strong>Personnalité</strong> : performant, audacieux, gagnant, motivant (comme un coach exigeant).</li>
+        <li><strong>Relation</strong> : le dépassement de soi — Nike te pousse, t'encourage à te surpasser.</li>
+        <li><strong>Culture</strong> : l'esprit américain de la gagne, le sport comme mode de vie, « no excuses ».</li>
+        <li><strong>Reflet</strong> (image du client-type) : un athlète, un jeune sportif ambitieux.</li>
+        <li><strong>Mentalisation</strong> (ce que je me dis de moi) : « je suis quelqu'un qui ne lâche rien ».</li>
+      </ul>
+      <p style="margin:4px 0 0;font-size:13px">💡 Méthode : haut du prisme (Physique/Personnalité/Culture) = émis par la marque ; bas (Relation/Reflet/Mentalisation) = côté consommateur.</p></div>
+
       <div class="grid2">
         <div class="card"><h4 style="margin-top:0">Système d'identité d'Aaker (1996)</h4><p class="mut" style="font-size:14px">4 perspectives pour voir la marque sous tous les angles :</p>
           <ul class="clean" style="font-size:14px">
@@ -319,6 +357,13 @@
           <p><span class="pill go">Règle des 5 associations</span> si on ne peut pas citer 5 associations précises &amp; différenciantes → ce n'est qu'un identifiant.</p>
         </div>
       </div>
+
+      <div class="ex"><div class="h">🔍 Marque vs Identifiant — le test des 5 associations</div>
+      <div class="exrow">
+        <div class="exmini"><div class="bn">✅ <span class="brand">Evian</span> = une marque</div>5 associations faciles : <em>pureté, Alpes, jeunesse/bébés, premium, « live young »</em>. Un imaginaire riche et différenciant.</div>
+        <div class="exmini"><div class="bn">❌ <span class="brand">Cristaline</span> = un identifiant</div>De l'eau, pas chère, c'est tout. Difficile de citer 5 associations précises → c'est juste un nom déposé, pas une vraie marque.</div>
+      </div>
+      <p style="margin:4px 0 0;font-size:13px">👉 Même produit (de l'eau !), mais l'une est une marque, l'autre un simple identifiant. C'est l'imaginaire qui fait la différence.</p></div>
 
       <h3>Les 3 niveaux sémiotiques (Heilbrunn)</h3>
       <div class="diagram">
@@ -345,6 +390,14 @@
         <div class="card" style="margin:8px 0"><strong>🦠 Virale</strong><p class="mut" style="font-size:13.5px;margin:6px 0 0">Une contagion (bouche-à-oreille). Pour mode &amp; tech.</p></div>
         <div class="card" style="margin:8px 0"><strong>🏛️ Icône culturelle</strong><p class="mut" style="font-size:13.5px;margin:6px 0 0">Performe un <strong>mythe</strong> qui résout une contradiction anthropologique. Pour produits « style de vie » (Nike, Coca).</p></div>
       </div>
+
+      <div class="ex"><div class="h">🔍 Une marque par métaphore</div>
+      <ul class="clean" style="font-size:14px">
+        <li>🧠 <strong>Empreinte mentale</strong> → <span class="brand">Dove</span> : un paquet d'associations (douceur, peau, naturel). Tu ne « dialogues » pas avec ton savon, tu reconnais ses codes.</li>
+        <li>🤝 <strong>Partenaire</strong> → <span class="brand">Nespresso</span> : un club, George Clooney, un abonnement, une relation suivie « What else ? ».</li>
+        <li>🦠 <strong>Virale</strong> → <span class="brand">TikTok</span> : la marque se propage par contagion, bouche-à-oreille, partage.</li>
+        <li>🏛️ <strong>Icône culturelle</strong> → <span class="brand">Nike</span> : porte le mythe du dépassement de soi, résout une tension (être ordinaire ↔ vouloir être un champion).</li>
+      </ul></div>
 
       <div class="keep"><div class="h">⭐ À retenir</div>
       <ul class="clean">
@@ -414,6 +467,18 @@
       <tr><td>Plan d'action</td><td>/4</td></tr>
       <tr><td>Qualité de l'argumentation</td><td>/2</td></tr></table></div>
 
+      <div class="ex"><div class="h">🔍 Exemple travaillé — le noyau central de <span class="brand">Nutella</span></div>
+      <p style="font-size:14px;margin-bottom:8px">On liste les associations, on les qualifie, on tranche :</p>
+      <table style="font-size:13.5px">
+        <tr><th>Association</th><th>Nature</th><th>Intens.</th><th>Unicité</th><th>Verdict</th></tr>
+        <tr><td>Plaisir / gourmandise</td><td>E</td><td>9</td><td>6</td><td><span class="verdict v-go">NOYAU</span></td></tr>
+        <tr><td>Goût chocolat-noisette</td><td>F</td><td>9</td><td>8</td><td><span class="verdict v-go">NOYAU</span></td></tr>
+        <tr><td>Petit-déjeuner / famille</td><td>S</td><td>8</td><td>7</td><td><span class="verdict v-go">NOYAU</span></td></tr>
+        <tr><td>Le pot en verre iconique</td><td>F</td><td>6</td><td>5</td><td><span class="verdict v-no">périphérie</span></td></tr>
+        <tr><td>La pub TV</td><td>F</td><td>4</td><td>2</td><td><span class="verdict v-no">périphérie</span></td></tr>
+      </table>
+      <p style="margin:6px 0 0;font-size:13.5px">👉 <strong>Test :</strong> enlève le goût chocolat-noisette → ce n'est plus Nutella (noyau). Change le pot → c'est toujours Nutella (périphérie). <br><b>Conséquence pour une extension :</b> « Nutella glace » respecte le noyau (plaisir, choco-noisette) = <span class="verdict v-go">GO</span>. « Nutella salé / apéritif » trahit le noyau gourmand-sucré = <span class="verdict v-no">NO GO</span>.</p></div>
+
       <h3>Extensions : la matrice de croissance</h3>
       <div class="diagram">
         <svg viewBox="0 0 520 420" role="img" aria-label="Matrice de croissance">
@@ -438,6 +503,12 @@
         <div class="card"><strong>Extension de GAMME</strong><p class="mut" style="font-size:13.5px">Même marque, <strong>même</strong> catégorie. Nouvelles variantes (goût, format, « zéro »). Horizontale (même niveau de prix) ou verticale (montée en gamme, ex. Levi's Lot n°1).</p></div>
         <div class="card"><strong>Extension de MARQUE</strong><p class="mut" style="font-size:13.5px">Même marque, <strong>autre</strong> catégorie. Continue = transfert de savoir-faire (Canon : optique→photo). Discontinue = transfert de prestige (Montblanc : stylos→montres).</p></div>
       </div>
+      <div class="ex"><div class="h">🔍 Gamme ou marque ? Le réflexe</div>
+      <p style="font-size:14px;margin-bottom:6px">Pose-toi UNE question : « est-ce le même marché ? »</p>
+      <div class="exrow">
+        <div class="exmini"><div class="bn">Extension de GAMME</div><span class="brand">Coca Cherry</span>, <span class="brand">Coca Zero</span> : toujours du soda (même marché), juste une variante. ✅ Réussi : Apple iPhone → iPhone Pro/Mini.</div>
+        <div class="exmini"><div class="bn">Extension de MARQUE</div><span class="brand">Bic</span> : stylos → rasoirs → briquets (nouveaux marchés). ⚠️ Échec célèbre : <span class="brand">Bic parfum</span> — on n'achète pas un parfum à un fabricant de stylos jetables (noyau « jetable/pas cher » incompatible avec le luxe).</div>
+      </div></div>
       <div class="keep"><div class="h">⭐ À retenir</div><strong>Zone rouge</strong> (toucher au noyau) = « ça équivaut à changer de marque ». <strong>Zone verte</strong> (périphérie) = adaptation acceptable. Un changement de logo passe SI il modernise sans contredire les valeurs.</div>
       <div class="trap"><div class="h">⚠️ Pièges</div><strong>Moscovici</strong> = représentation sociale (1961). <strong>Abric</strong> = noyau central. Ne pas inverser. Gamme (même marché) ≠ Marque (nouveau marché).</div>
     </section>
@@ -476,12 +547,21 @@
         <tr><td><strong>Fidélité</strong></td><td>Attachement durable. Comportementale (rachat) vs attitudinale (préférence).</td></tr>
       </table>
 
+      <div class="ex"><div class="h">🔍 La preuve par le test à l'aveugle — <span class="brand">Pepsi vs Coca</span></div>
+      <p style="font-size:14px;margin:0">Expérience célèbre (« Pepsi Challenge ») : à l'aveugle, beaucoup de gens <em>préfèrent le goût Pepsi</em>. Mais dès qu'on montre les marques, ils choisissent <em>Coca</em>. <br>👉 Le goût (qualité objective) ne change pas — c'est le <strong>capital-marque de Coca</strong> qui modifie la préférence. CBBE = exactement « l'effet de la marque sur ta réponse ». L'IRM montre même que voir le logo Coca active les zones de plaisir/souvenir du cerveau.</p></div>
+
       <h3>Le paper à connaître : Pfeifer et al. (2025)</h3>
       <p class="mut">Étudie comment le capital-marque influence la décision de <strong>prolonger une marque déposée</strong>. Deux dimensions, deux effets opposés (résultat <em>contre-intuitif</em> = piège classique) :</p>
       <div class="grid2">
         <div class="card" style="border-color:var(--green)"><strong style="color:var(--green)">RS — Relevant Stature ✅</strong><p style="font-size:14px">Connaissance + Estime + Pertinence.<br><strong>Effet POSITIF</strong> sur la prolongation. « Force tranquille » : la notoriété rassure, réduit le risque → on garde la marque.</p></div>
         <div class="card" style="border-color:var(--red)"><strong style="color:var(--red)">ED — Energized Differentiation ❌</strong><p style="font-size:14px">Unicité + Dynamisme + Innovation.<br><strong>Effet NÉGATIF</strong>. « Piège de la niche » (Porter) : trop différencié = segment étroit, fragile, coûteux → on abandonne plus souvent.</p></div>
       </div>
+      <div class="ex"><div class="h">🔍 RS vs ED en clair</div>
+      <div class="exrow">
+        <div class="exmini"><div class="bn">✅ Forte RS → <span class="brand">Coca-Cola</span></div>Tout le monde la connaît et l'estime. C'est une « valeur sûre » → on la garde et on la renouvelle sans risque. La notoriété protège.</div>
+        <div class="exmini"><div class="bn">❌ Forte ED → une marque de <span class="brand">niche très pointue</span></div>Ultra-différenciée, hyper-innovante, mais sur un micro-segment fragile → si la mode passe, elle s'effondre. La différenciation extrême = piège.</div>
+      </div>
+      <p style="margin:6px 0 0;font-size:13px">⚠️ Contre-intuitif (= piège d'exam) : on croirait que « se différencier » est toujours bon. Pfeifer montre l'inverse pour la <em>survie</em> d'une marque déposée.</p></div>
       <div class="keep"><div class="h">⭐ À retenir</div>Reco managériale de Pfeifer : pour protéger une marque <strong>différenciée</strong>, déposer des <strong>logos / couleurs</strong> (brand-association marks) → ça atténue l'effet négatif de l'ED. <em>Lien direct avec l'INPI (module 5) et l'arrêt Louboutin.</em></div>
     </section>
 
@@ -501,6 +581,15 @@
         <div class="card" style="border-color:var(--acc)"><strong>④ Disponible</strong><p class="mut" style="font-size:13.5px">Libre de droits antérieurs (recherche d'antériorité).</p></div>
       </div>
       <p class="mut" style="font-size:14px">Échelle de distinctivité (du + fort au + faible) : <span class="pill g">Fantaisiste</span> → <span class="pill a">Évocatrice</span> → <span class="pill">Descriptive</span> → <span class="pill" style="color:var(--red)">Générique</span></p>
+
+      <div class="ex"><div class="h">🔍 L'échelle de distinctivité avec de vraies marques</div>
+      <ul class="clean" style="font-size:14px">
+        <li><span class="pill g">Fantaisiste / arbitraire</span> <span class="brand">Apple</span> (une pomme n'a aucun rapport avec l'informatique), <span class="brand">Kodak</span> (mot inventé). → protection <strong>maximale</strong>.</li>
+        <li><span class="pill a">Évocatrice</span> <span class="brand">Netflix</span> (évoque « net » + « flicks/films ») : suggère sans décrire. → OK.</li>
+        <li><span class="pill">Descriptive</span> « Banque en ligne » : décrit le service → <strong>refusée</strong> (personne ne peut monopoliser un mot courant).</li>
+        <li><span class="pill" style="color:var(--red)">Générique</span> « Pain » pour de la boulangerie → <strong>impossible</strong> à déposer.</li>
+      </ul>
+      <p style="margin:4px 0 0;font-size:13px">💡 Règle : plus le mot est <em>éloigné</em> du produit, plus il est protégeable. « Pomme » pour un primeur = refusé ; « Pomme » pour des ordis = parfait.</p></div>
 
       <h3>La procédure de dépôt (5 étapes)</h3>
       <div class="flow">
@@ -532,6 +621,15 @@
         <div class="card" style="border-color:var(--acc)"><strong style="color:var(--acc)">🐢 Système 2 — « le passager »</strong><p style="font-size:14px">Lent, analytique, effortful. Souvent il ne fait que <em>justifier</em> après coup la décision du Système 1.</p></div>
       </div>
       <p class="mut" style="font-size:14px"><strong>Biais à savoir relier à un levier marketing :</strong> <span class="pill">ancrage</span><span class="pill">cadrage (framing)</span><span class="pill">disponibilité</span><span class="pill">aversion à la perte</span><span class="pill">effet de dotation</span><span class="pill">halo</span><span class="pill">WYSIATI</span></p>
+
+      <div class="ex"><div class="h">🔍 Chaque biais = une technique marketing que tu connais</div>
+      <ul class="clean" style="font-size:14px">
+        <li><strong>Ancrage</strong> → le <span class="brand">prix barré</span> : « 899€ <s>499€</s> ». Le 1er chiffre « ancre » et fait paraître le 2ᵉ comme une affaire.</li>
+        <li><strong>Aversion à la perte</strong> → <span class="brand">Booking</span> : « Plus que 1 chambre à ce prix ! ». La peur de perdre fait plus agir que l'envie de gagner.</li>
+        <li><strong>Preuve sociale / disponibilité</strong> → <span class="brand">Amazon</span> : « 12 000 avis ★★★★ ». On suit le nombre.</li>
+        <li><strong>Cadrage (framing)</strong> → un yaourt « <span class="brand">90 % sans matière grasse</span> » se vend mieux que « 10 % de gras » — même produit, mots différents.</li>
+        <li><strong>Effet de dotation</strong> → l'<span class="brand">essai gratuit 30 jours</span> : une fois que tu « possèdes », tu ne veux plus rendre.</li>
+      </ul></div>
 
       <h3>La TPB / TAP — Théorie de l'Action Planifiée (Ajzen 1991) <span style="color:var(--orange)">★</span></h3>
       <p class="mut">L'arme n°3. Modèle qui prédit le comportement. À savoir schématiser ET appliquer (cas « Emma part en échange ? »).</p>
@@ -579,6 +677,13 @@
         </svg>
         <div class="cap">Les 6 dimensions du BRQ (Fournier 1998)</div>
       </div>
+      <div class="ex"><div class="h">🔍 Tu as déjà des « relations » avec des marques</div>
+      <ul class="clean" style="font-size:14px">
+        <li>💍 <strong>Mariage / amour passion</strong> → <span class="brand">Apple</span> : un fan rachète chaque iPhone, défend la marque, attend le keynote comme un rendez-vous.</li>
+        <li>👶 <strong>Amitié d'enfance</strong> → <span class="brand">Nutella</span> ou <span class="brand">Nesquik</span> : la marque de ton enfance, un lien nostalgique et fidèle.</li>
+        <li>🤷 <strong>Mariage de convenance</strong> → ta marque de <span class="brand">papier toilette</span> : tu la rachètes par habitude, sans passion.</li>
+      </ul>
+      <p style="margin:4px 0 0;font-size:13px">💡 L'idée de Fournier : on traite les marques comme des personnes (animisme). La question devient « <em>qui</em> est cette marque dans ma vie ? ».</p></div>
       <div class="keep"><div class="h">⭐ À retenir</div>La <strong>fidélité</strong> du module 4 = une relation de qualité (BRQ). Belk = « Soi étendu » (nous sommes ce que nous possédons). Bourdieu = « Distinction » (consommer pour se classer).</div>
     </section>
 
@@ -609,6 +714,15 @@
         </svg>
         <div class="cap">VRIN — et VRIO = VRIN + Organisé pour capter la valeur</div>
       </div>
+
+      <div class="ex"><div class="h">🔍 VRIN appliqué à la recette secrète de <span class="brand">Coca-Cola</span></div>
+      <ul class="clean" style="font-size:14px">
+        <li><strong>V</strong>aluable : la recette crée un goût unique que les clients réclament → oui.</li>
+        <li><strong>R</strong>are : une seule entreprise la détient (coffre-fort à Atlanta) → oui.</li>
+        <li><strong>I</strong>nimitable : personne n'a réussi à la copier exactement en 130 ans → oui.</li>
+        <li><strong>N</strong>on-substituable : Pepsi existe mais ne « remplace » pas Coca pour ses fans → oui.</li>
+      </ul>
+      <p style="margin:4px 0 0;font-size:13px">✅ Les 4 cochés → <strong>avantage concurrentiel durable</strong>. Compare : une simple usine moderne est <em>Valuable</em> mais pas <em>Rare</em> (tout le monde peut en bâtir une) → pas d'avantage durable.</p></div>
 
       <h3>La chaîne d'alignement (le pont vers l'activation)</h3>
       <div class="flow">
@@ -645,6 +759,10 @@
       </div>
       <div class="card"><strong>L'instrument SMART</strong> (sous-acronyme — pour cataloguer les éléments visuels) :<p style="margin:8px 0 0;font-size:14px"><span class="pill a">S</span>ymbols · <span class="pill a">M</span>ovements · <span class="pill a">A</span>reas (zones de la scène) · <span class="pill a">R</span>elations (couleur, ligne, forme, cadrage, lumière) · <span class="pill a">T</span>one. <br><span class="mut">Cas du paper : Rabble Wine (« wine for everybody », archétypes Regular Guy + Jester).</span></p></div>
 
+      <div class="ex"><div class="h">🔍 EPIC en clair avec les archétypes</div>
+      <p style="font-size:14px;margin:0">Un <strong>archétype</strong> = un personnage universel qu'on reconnaît tous instantanément. Les marques en incarnent un :<br>
+      🦸 le Héros → <span class="brand">Nike</span> (se dépasser) · 🤡 le Bouffon → <span class="brand">M&amp;M's</span> (l'humour) · 🧙 le Magicien → <span class="brand">Disney</span> (l'émerveillement) · 🏍️ le Rebelle → <span class="brand">Harley-Davidson</span> (la liberté). <br>👉 EPIC = méthode pour passer de l'essence (« qui je suis ») → un archétype → des images cohérentes.</p></div>
+
       <h3>② MEME — le branding « dé-brandé » (Marty 2025)</h3>
       <p class="mut">Faire du branding <strong>sans avoir l'air de faire de la pub</strong>. Origine du concept : Dawkins (1976). 3 propriétés :</p>
       <div class="grid3">
@@ -652,6 +770,8 @@
         <div class="card" style="margin:6px 0"><strong>② Poreux, jouable &amp; viral</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">bricolage, partage, re-gram (digital labor / fanadvertising)</p></div>
         <div class="card" style="margin:6px 0"><strong>③ Branding dépublicitarisé</strong><p class="mut" style="font-size:12.5px;margin:4px 0 0">esthétique brute, « contrôle du décontrôle » (Cardon)</p></div>
       </div>
+      <div class="ex"><div class="h">🔍 Des marques qui font des mèmes</div>
+      <p style="font-size:14px;margin:0"><span class="brand">Netflix France</span>, <span class="brand">IKEA</span>, <span class="brand">Oasis</span> (les jeux de mots fruités), <span class="brand">Burger King</span> : elles postent des images drôles qui rebondissent sur l'actu (<em>newsjacking</em>), avec un ton « comme un pote ». Résultat : tu partages → tu fais leur pub <em>gratuitement</em> (digital labor), et ça ne « sent pas la pub ». C'est ça le branding dé-brandé.</p></div>
 
       <h3>③ PAST — rendre la longévité visible (Pecot et al. 2022)</h3>
       <p class="mut">Comment montrer visuellement qu'une marque est ancienne. Concept-clé : le <strong>« visual mix »</strong> = la sélection / le dosage / l'articulation des codes (dérivé du marketing mix de Borden). Trop = « fall into farce ».</p>
@@ -666,6 +786,13 @@
           </ul>
         </div>
       </div>
+      <div class="ex"><div class="h">🔍 Les 4 thèmes de longévité avec de vraies pubs</div>
+      <ul class="clean" style="font-size:14px">
+        <li><strong>Legitimizing</strong> → <span class="brand">Heinz</span> « 150 years » : on est là depuis si longtemps = on est les meilleurs (compétence).</li>
+        <li><strong>Humorous</strong> → <span class="brand">McDonald's</span> « l'indémodable Big Mac » : autodérision sur son âge → « on est vieux mais fun ».</li>
+        <li><strong>Nostalgic</strong> → <span class="brand">Quézac</span> « toujours pas de datacenter depuis 1901 » : un passé-refuge contre le monde moderne.</li>
+        <li><strong>Aesthetic</strong> → <span class="brand">Lavazza</span> : l'esthétique glamour de l'Italie des années 70, pour le style (pas l'histoire).</li>
+      </ul></div>
       <div class="trap"><div class="h">⚠️ Pièges</div>① Seul EPIC est un acronyme. ② Le SMART de Scholz = <strong>S</strong>ymbols/<strong>M</strong>ovements/<strong>A</strong>reas/<strong>R</strong>elations/<strong>T</strong>one — PAS le SMART de gestion de projet. ③ Nostalgic (opposition au présent) ≠ Legitimizing (continuité).</div>
     </section>
 
